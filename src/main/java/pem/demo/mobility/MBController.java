@@ -15,15 +15,16 @@ public class MBController {
     @Autowired
     MBService mbService;
 
-    @GetMapping("single")
+    @GetMapping("getDataByFile")
     public String saveDataByFile(Model model) {
         model.addAttribute("data", "changjun!!");
         return "hello";
     }
 
 
-    @PostMapping("/single2")
-    public String uploadSingle(@RequestParam("files") List<MultipartFile> files) throws Exception {
+    @PostMapping("/multifiles")
+    public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
+        model.addAttribute("data", "who?!!");
         String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
         String basePath = rootPath + "/" + "single";
         for (MultipartFile file : files) {
@@ -31,9 +32,9 @@ public class MBController {
             File dest = new File(filePath);
             System.out.println(filePath);
             file.transferTo(dest); // 파일 업로드 작업 수행
+            mbService.saveDataByFile(filePath);
+
         }
-
-
         return "hello";
     }
 }

@@ -21,6 +21,12 @@ public class MBService {
         getDataByDir.run(dirName, mbRepository);
     }
 
+    @Transactional
+    public void saveDataByFile(String filePath) {
+        GetDataByFile getDataByFile = new GetDataByFile();
+        getDataByFile.run(filePath, mbRepository);
+    }
+
 
 
 }
