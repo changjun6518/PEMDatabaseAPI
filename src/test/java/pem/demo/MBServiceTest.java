@@ -28,6 +28,6 @@ public class MBServiceTest {
     public void file로_디비에데이터넣기() {
 
         String dirName = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\OMG";
-        mbService.saveDataByFile(dirName);
+        mbService.saveDataByDir(dirName);
     }
 }
