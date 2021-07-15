@@ -12,7 +12,7 @@ public class GetDataByFile {
         String user = "";
         try {
             String[] dirNameSplit = filePath.split("_");
-            user = dirNameSplit[dirNameSplit.length - 1];       //get user name (the last directory name)
+            user = dirNameSplit[dirNameSplit.length - 1].replace(".txt","");       //get user name (the last directory name)
             System.out.println("user : " + user);
         } catch (Exception e) {
             System.out.println("not found user");
