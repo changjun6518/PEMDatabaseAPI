@@ -2,12 +2,13 @@ package pem.demo.mobility;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import pem.demo.util.BaseTimeEntity;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-public class MobilityData {
+public class MobilityData extends BaseTimeEntity {
     @Id
     @GeneratedValue
     @Column(name = "mobility_id")
