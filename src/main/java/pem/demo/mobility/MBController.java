@@ -17,14 +17,14 @@ public class MBController {
 
     @GetMapping("getDataByFile")
     public String saveDataByFile(Model model) {
-        model.addAttribute("data", "changjun!!");
+        model.addAttribute("data", "chang");
         return "hello";
     }
 
 
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
-        model.addAttribute("data", "who?!!");
+        model.addAttribute("data", "data 저장이 완료 되었습니다!");
         String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
         String basePath = rootPath + "/" + "single";
         for (MultipartFile file : files) {
