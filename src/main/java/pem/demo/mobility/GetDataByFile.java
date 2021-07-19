@@ -1,5 +1,7 @@
 package pem.demo.mobility;
 
+import pem.demo.domain.MobilityData;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package pem.demo.mobility;
+package pem.demo.domain;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,8 @@ public class MobilityData extends BaseTimeEntity {
     @Column(name = "mobility_id")
     private Long id;
 
+    @ManyToOne
+    private Member member;
 
     private String user;
     private String ymd;

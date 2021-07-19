@@ -1,8 +1,6 @@
 package pem.demo.mobility;
 
-import javassist.compiler.ast.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import pem.demo.domain.MobilityData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetDataByDir {
-
-//    @Autowired
-//    MBRepository mbRepository;
 
     public File getDirList(String dirName) {
         File dir = new File(dirName);
