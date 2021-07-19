@@ -1,14 +1,16 @@
 package pem.demo.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Member {
     @Id
     @GeneratedValue
@@ -17,7 +19,13 @@ public class Member {
 
     private String name;
 
+    @OneToMany(mappedBy = "member")
+    private List<MobilityData> mobilityDatas = new ArrayList<>();
+
+
     public Member(String name) {
         this.name = name;
     }
+
+
 }
