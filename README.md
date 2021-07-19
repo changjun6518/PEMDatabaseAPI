@@ -10,3 +10,4 @@
 ### TODO List
 * CRUD
 * 엔티티 연관관계 설정
+* cascade type
