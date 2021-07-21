@@ -34,8 +34,8 @@ public class MobilityData extends BaseTimeEntity {
         longitude = str[4];
     }
 
-    public MobilityData(String user, String longData) {
-        member =  new Member(user);
+    public MobilityData(Member user, String longData) {
+        member =  user;
 
         String str[] =  longData.split("\t");
         ymd = str[0];

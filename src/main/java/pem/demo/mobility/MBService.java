@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pem.demo.domain.MemberService;
 
 @Service
 @Transactional(readOnly = true)
@@ -11,20 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class MBService {
     @Autowired
     MBRepository mbRepository;
+    @Autowired
+    MemberService memberService;
 
     public void add(MobilityData mb) {
         mbRepository.save(mb);
     }
 
-    public void saveDataByDir(String dirName) {
-        GetDataByDir getDataByDir = new GetDataByDir();
-        getDataByDir.run(dirName, mbRepository);
-    }
-
     @Transactional
     public void saveDataByFile(String filePath) {
-        GetDataByFile getDataByFile = new GetDataByFile();
-        getDataByFile.run(filePath, mbRepository);
+        GetDataByFile getDataByFile = new GetDataByFile(mbRepository, memberService);
+        getDataByFile.run(filePath);
     }
 
 

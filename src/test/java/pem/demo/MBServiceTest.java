@@ -23,11 +23,4 @@ public class MBServiceTest {
         MobilityData mb = new MobilityData(temp);
         mbService.add(mb);
     }
-
-    @Test
-    public void file로_디비에데이터넣기() {
-
-        String dirName = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\OMG";
-        mbService.saveDataByDir(dirName);
-    }
 }
