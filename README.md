@@ -9,5 +9,10 @@
     
 ### TODO List
 * CRUD
+  * ~~생성~~
+  * 읽기
+  * 수정
+  * 삭제
+  
 * 엔티티 연관관계 설정
 * cascade type

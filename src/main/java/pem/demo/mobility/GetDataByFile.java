@@ -21,6 +21,7 @@ public class GetDataByFile {
         this.mbRepository = mbRepository;
         this.memberService = memberService;
     }
+
     public Member getByUserNameOnFile(String filePath) {
         String userName = "";
         try {
