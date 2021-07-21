@@ -1,7 +1,8 @@
-package pem.demo.domain;
+package pem.demo.mobility;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import pem.demo.domain.Member;
 import pem.demo.util.BaseTimeEntity;
 
 import javax.persistence.*;

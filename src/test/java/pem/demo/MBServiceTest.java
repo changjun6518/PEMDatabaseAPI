@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import pem.demo.mobility.MBService;
-import pem.demo.domain.MobilityData;
+import pem.demo.mobility.MobilityData;
 
 @SpringBootTest
 @Transactional

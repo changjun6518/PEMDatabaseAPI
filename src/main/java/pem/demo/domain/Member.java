@@ -3,6 +3,7 @@ package pem.demo.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pem.demo.mobility.MobilityData;
 
 import javax.persistence.*;
 import java.util.ArrayList;
