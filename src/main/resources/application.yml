@@ -5,7 +5,11 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: PEMDB
     password: "@T806T817t818"
-#    나중에 암호화해서 올릴것
+    hikari:
+      data-source-properties:
+        rewriteBatchedStatements: true
+  #    나중에 암호화해서 올릴것
+
   jpa:
     hibernate:
       ddl-auto: create
@@ -13,6 +17,9 @@ spring:
       hibernate:
         #        show_sql: true
         format_sql: true
+        jdbc:
+          batch_size: 2000
+
   servlet:
     multipart:
       max-file-size: 10MB
