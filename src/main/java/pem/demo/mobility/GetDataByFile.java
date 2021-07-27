@@ -41,13 +41,13 @@ public class GetDataByFile {
         String line;
         List<MobilityData> mobilityDataList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 MobilityData mobilityData = new MobilityData(user, line);
                 //data upload
                 mobilityDataList.add(mobilityData);
 //                    mbRepository.save(mobilityData);
             }
             mbRepository.saveAll(mobilityDataList);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

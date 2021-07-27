@@ -12,7 +12,6 @@ import javax.persistence.*;
 public class MobilityData extends BaseTimeEntity {
     @Id
     @GeneratedValue
-    @Column(name = "mobility_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -21,7 +20,7 @@ public class MobilityData extends BaseTimeEntity {
 
     private String ymd;
     private String hms;
-    private String unix_time;
+    private String unixTime;
     private String latitude;
     private String longitude;
 
@@ -29,7 +28,7 @@ public class MobilityData extends BaseTimeEntity {
         String str[] =  longData.split("\t");
         ymd = str[0];
         hms = str[1];
-        unix_time = str[2];
+        unixTime = str[2];
         latitude = str[3];
         longitude = str[4];
     }
@@ -40,7 +39,7 @@ public class MobilityData extends BaseTimeEntity {
         String str[] =  longData.split("\t");
         ymd = str[0];
         hms = str[1];
-        unix_time = str[2];
+        unixTime = str[2];
         latitude = str[3];
         longitude = str[4];
     }
@@ -52,7 +51,7 @@ public class MobilityData extends BaseTimeEntity {
                 "user='" + member.getName() + '\'' +
                 ", ymd='" + ymd + '\'' +
                 ", hms='" + hms + '\'' +
-                ", unix_time='" + unix_time + '\'' +
+                ", unix_time='" + unixTime + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
                 '}';
