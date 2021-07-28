@@ -1,41 +1,67 @@
 package pem.demo.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import pem.demo.domain.Member;
+import pem.demo.domain.MemberRepository;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Optional;
+
 
 public class MariaDBConnetor {
-    public static void main(String[] args) {
+
+    private static MemberRepository memberRepository;
+
+    public MariaDBConnetor(MemberRepository memberRepository) {
+        MariaDBConnetor.memberRepository = memberRepository;
+    }
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+//        Member member = new Member("chang");
+//        Member member = null;
+//        Optional<Member> omg = memberRepository.findMemberByName("OMG");
+//        if (omg.isPresent()) {
+//            member = omg.get();
+//        }
+        Long id = 360L;
+        String ymd = "123";
+        String hms = "1234";
+        String unixTime = "12";
+        String latitude = "1";
+        String longitude = "2";
+
+        String url = "jdbc:mariadb://librarymusik.synology.me:3306/PEMDB";
+        String sql = "INSERT INTO mobility_data(id,ymd,hms,unix_time,latitude,longitude) VALUES (?,?,?,?,?,?)";
+
+
         Connection con = null;
-
-        String server = "librarymusik.synology.me";
-        String port = "3306";
-        String database = "PEMDB";
-        String user_name = "PEMDB";
-        String password = "@T806T817t818";
-
+        PreparedStatement st = null;
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println(" 드라이버 로딩 오류 : " + e.getMessage());
-            e.printStackTrace();
-        }
-//jdbc:mariadb://librarymusik.synology.me:3306/PEMDB
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://" +
-                    server + ":" + port + "/" +
-                    database +
-                    "?useSSL=false", user_name, password); // SSL 실행 확인
-            System.out.println("connection success! 연결 성공!!");
-        } catch(SQLException e) {
-            System.err.println("에러 내용 :" + e.getMessage());
-            e.printStackTrace();
-        }
+            con = DriverManager.getConnection(url, "PEMDB", "@T806T817t818");
+            st = con.prepareStatement(sql);
+//            st.setObject(1, member);
+            st.setLong(1, id);
+            st.setString(2, ymd);
+            st.setString(3, hms);
+            st.setString(4, unixTime);
+            st.setString(5, latitude);
+            st.setString(6, longitude);
 
-        try {
-            if(con != null)
-                con.close();
-        } catch (SQLException e) {}
+
+            int ret = st.executeUpdate();
+
+            System.out.println(ret);
+        } catch (SQLException e) {
+            System.out.println("[SQL Error : " + e.getMessage() + "]");
+        } catch (ClassNotFoundException e1) {
+            System.out.println("[JDBC Connector Driver 오류 : " + e1.getMessage() + "]");
+        } finally {
+            st.close();
+            con.close();
+        }
     }
 }
