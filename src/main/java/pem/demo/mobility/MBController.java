@@ -32,8 +32,7 @@ public class MBController {
             File dest = new File(filePath);
             System.out.println(filePath);
             file.transferTo(dest); // 파일 업로드 작업 수행
-            mbService.saveDataByFile(filePath);
-
+            mbService.batchInsertByFile(filePath);
         }
         return "hello";
     }

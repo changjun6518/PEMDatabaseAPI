@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pem.demo.domain.MemberService;
+import pem.demo.util.CreateMBDataByJdbc;
+
+import java.sql.SQLException;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,6 +26,12 @@ public class MBService {
     public void saveDataByFile(String filePath) {
         GetDataByFile getDataByFile = new GetDataByFile(mbRepository, memberService);
         getDataByFile.run(filePath);
+    }
+
+    @Transactional
+    public void batchInsertByFile(String filePath) throws SQLException {
+        CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
+        createMBDataByJdbc.run(filePath);
     }
 
 
