@@ -30,14 +30,15 @@ public class MariaDBConnetor {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             con = DriverManager.getConnection(url, "PEMDB", "@T806T817t818");
+
 //            stId = con.prepareStatement("SELECT LAST_INSERT_ID()");
             st = con.prepareStatement(sql);
+            con.setAutoCommit(false);
 
-
-            String filePath = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\OMG\\20200304_OMG.txt";
+            String filePath = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\OMG\\20200318_OMG.txt";
             try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
                 String line;
-//                long id = stId.executeLargeUpdate();
+                int i = 0;
                 long start = System.currentTimeMillis();
                 while ((line = br.readLine()) != null) {
                     MobilityData mobilityData = new MobilityData(line);
@@ -47,12 +48,17 @@ public class MariaDBConnetor {
                     st.setString(3, mobilityData.getUnixTime());
                     st.setString(4, mobilityData.getLatitude());
                     st.setString(5, mobilityData.getLongitude());
-                    st.executeUpdate();
+//                    st.executeUpdate();
+                    st.addBatch();
+//                    if (i++ % 200 == 0) {
+//                        st.executeBatch();
+//                    }11587 14441
                 }
-
+                st.executeBatch();
+                con.commit();
 //                int ret = st.executeUpdate();
                 long end = System.currentTimeMillis();
-                System.out.println("수행시간 : " + (end - start));
+                System.out.printf("execution time : %f sec", (float)(end - start) / 1000L);
 //                System.out.println(ret);
             }catch (Exception e) {
                 e.printStackTrace();
