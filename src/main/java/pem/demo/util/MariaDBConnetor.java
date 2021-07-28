@@ -6,10 +6,7 @@ import pem.demo.domain.MemberRepository;
 import pem.demo.mobility.MobilityData;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,30 +21,32 @@ public class MariaDBConnetor {
     }
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         String url = "jdbc:mariadb://librarymusik.synology.me:3306/PEMDB";
-        String sql = "INSERT INTO mobility_data(id,ymd,hms,unix_time,latitude,longitude) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO mobility_data(id,ymd,hms,unix_time,latitude,longitude) VALUES (NULL,?,?,?,?,?)";
 
 
         Connection con = null;
         PreparedStatement st = null;
+//        PreparedStatement stId = null;
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             con = DriverManager.getConnection(url, "PEMDB", "@T806T817t818");
+//            stId = con.prepareStatement("SELECT LAST_INSERT_ID()");
             st = con.prepareStatement(sql);
-//            st.setObject(1, member);
 
-            String filePath = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\OMG\\20200302_OMG.txt";
+
+            String filePath = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\OMG\\20200304_OMG.txt";
             try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
                 String line;
-                Long id = 361L;
+//                long id = stId.executeLargeUpdate();
                 long start = System.currentTimeMillis();
                 while ((line = br.readLine()) != null) {
                     MobilityData mobilityData = new MobilityData(line);
-                    st.setLong(1, id++);
-                    st.setString(2, mobilityData.getYmd());
-                    st.setString(3, mobilityData.getHms());
-                    st.setString(4, mobilityData.getUnixTime());
-                    st.setString(5, mobilityData.getLatitude());
-                    st.setString(6, mobilityData.getLongitude());
+//                    st.setLong(1, id++);
+                    st.setString(1, mobilityData.getYmd());
+                    st.setString(2, mobilityData.getHms());
+                    st.setString(3, mobilityData.getUnixTime());
+                    st.setString(4, mobilityData.getLatitude());
+                    st.setString(5, mobilityData.getLongitude());
                     st.executeUpdate();
                 }
 
