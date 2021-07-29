@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class MemberService {
     @Autowired
     MemberRepository memberRepository;

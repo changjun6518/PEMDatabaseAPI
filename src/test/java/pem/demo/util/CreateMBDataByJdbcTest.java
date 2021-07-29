@@ -14,7 +14,7 @@ class CreateMBDataByJdbcTest {
     MemberService memberService;
     @Test
     public void DB연결하고저장확인() throws SQLException {
-        String filePath = "C:\\Users\\ChangJun.Choi\\Desktop\\LAB\\em\\em\\rawdata\\bjh\\20140120_bjh.txt";
+        String filePath = "C:\\Users\\ChangJun.Choi\\Desktop\\single\\20200301_OMG.txt";
 
         CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
         createMBDataByJdbc.run(filePath);

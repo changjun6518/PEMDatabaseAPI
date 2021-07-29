@@ -26,9 +26,9 @@ public class MBController {
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
         model.addAttribute("data", "data 저장이 완료 되었습니다!");
         String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-        String basePath = rootPath + "/" + "single";
+        String basePath = rootPath + "\\" + "single";
         for (MultipartFile file : files) {
-            String filePath = basePath + "/" + file.getOriginalFilename();
+            String filePath = basePath + "\\" + file.getOriginalFilename();
             File dest = new File(filePath);
             System.out.println(filePath);
             file.transferTo(dest); // 파일 업로드 작업 수행

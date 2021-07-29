@@ -17,10 +17,11 @@ public class CreateMBDataByJdbc {
         this.memberService = memberService;
     }
 
+
     public void run(String filePath) throws SQLException {
         Long memberId = getByUserNameOnFile(filePath);
         connectDB();
-        batchInsert(filePath, memberId);
+        batchInsert2(filePath, memberId);
     }
 
 
@@ -34,7 +35,7 @@ public class CreateMBDataByJdbc {
         }
     }
 
-    public void batchInsert(String filePath, Long memberId) throws SQLException {
+    public void batchInsert2(String filePath, Long memberId) throws SQLException {
         String sql = "INSERT INTO mobility_data(id,ymd,hms,unix_time,latitude,longitude,created_time,modified_time, member_id) VALUES (NULL,?,?,?,?,?,?,?,?)";
         try {
             st = con.prepareStatement(sql);
@@ -53,6 +54,7 @@ public class CreateMBDataByJdbc {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             long start = System.currentTimeMillis();
+            System.out.println("Member Id : " + memberId);
             while ((line = br.readLine()) != null) {
                 MobilityData mobilityData = new MobilityData(line);
                 st.setString(1, mobilityData.getYmd());
@@ -62,7 +64,7 @@ public class CreateMBDataByJdbc {
                 st.setString(5, mobilityData.getLongitude());
                 st.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
                 st.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-                st.setLong(8, memberId);
+                st.setInt(8, Math.toIntExact(memberId));
                 st.addBatch();
             }
             st.executeBatch();
@@ -75,17 +77,20 @@ public class CreateMBDataByJdbc {
         }
     }
 
+
     public Long getByUserNameOnFile(String filePath) {
         String userName = "";
+        Long userId = null;
         try {
             String[] dirNameSplit = filePath.split("_");
-            userName = dirNameSplit[dirNameSplit.length - 1].replace(".txt","");       //get user name (the last directory name)
+            userName = dirNameSplit[dirNameSplit.length - 1].replace(".txt", "");       //get user name (the last directory name)
             System.out.println("user : " + userName);
+            userId = memberService.findUserByUserName(userName).getId();
+
         } catch (Exception e) {
             System.out.println("not found user");
         }
-
-        return memberService.findUserByUserName(userName).getId();
+        return userId;
     }
 
 }
