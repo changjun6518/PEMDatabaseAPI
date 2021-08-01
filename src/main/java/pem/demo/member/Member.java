@@ -3,6 +3,7 @@ package pem.demo.member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pem.demo.bff.Bff;
 import pem.demo.mobilityData.MobilityData;
 
 import javax.persistence.*;
@@ -23,6 +24,8 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MobilityData> mobilityDatas = new ArrayList<>();
 
+    @OneToOne(mappedBy = "member")
+    private Bff bff;
 
     public Member(String name) {
         this.name = name.toLowerCase();

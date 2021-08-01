@@ -14,7 +14,9 @@ import javax.persistence.*;
 public class MobilityData extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "mobility_data_id")
     private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
@@ -35,8 +37,8 @@ public class MobilityData extends BaseTimeEntity {
         longitude = str[4];
     }
 
-    public MobilityData(Member user, String longData) {
-        member =  user;
+    public MobilityData(Member member, String longData) {
+        this.member =  member;
 
         String str[] =  longData.split("\t");
         ymd = str[0];
