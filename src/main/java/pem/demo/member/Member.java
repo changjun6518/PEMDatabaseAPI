@@ -1,9 +1,9 @@
-package pem.demo.domain;
+package pem.demo.member;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pem.demo.mobility.MobilityData;
+import pem.demo.mobilityData.MobilityData;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class Member {
 
 
     public Member(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
 

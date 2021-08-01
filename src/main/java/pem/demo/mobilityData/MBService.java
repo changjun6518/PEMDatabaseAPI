@@ -1,11 +1,9 @@
-package pem.demo.mobility;
+package pem.demo.mobilityData;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import pem.demo.domain.MemberService;
-import pem.demo.util.CreateMBDataByJdbc;
+import pem.demo.member.MemberService;
 
 import java.sql.SQLException;
 

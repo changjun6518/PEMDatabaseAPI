@@ -1,12 +1,9 @@
-package pem.demo.mobility;
+package pem.demo.mobilityData;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import pem.demo.domain.Member;
-import pem.demo.domain.MemberService;
-
-import static org.junit.jupiter.api.Assertions.*;
+import pem.demo.member.Member;
+import pem.demo.member.MemberService;
 
 class GetDataByFileTest {
 

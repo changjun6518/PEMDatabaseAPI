@@ -1,9 +1,8 @@
-package pem.demo.mobility;
+package pem.demo.mobilityData;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pem.demo.domain.Member;
-import pem.demo.domain.MemberService;
+import pem.demo.member.Member;
+import pem.demo.member.MemberService;
 
 import java.io.BufferedReader;
 import java.io.File;

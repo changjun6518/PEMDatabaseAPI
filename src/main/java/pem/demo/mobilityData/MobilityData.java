@@ -1,9 +1,9 @@
-package pem.demo.mobility;
+package pem.demo.mobilityData;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pem.demo.domain.Member;
+import pem.demo.member.Member;
 import pem.demo.util.BaseTimeEntity;
 
 import javax.persistence.*;

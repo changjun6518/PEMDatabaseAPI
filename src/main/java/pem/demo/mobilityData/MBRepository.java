@@ -1,4 +1,4 @@
-package pem.demo.mobility;
+package pem.demo.mobilityData;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
