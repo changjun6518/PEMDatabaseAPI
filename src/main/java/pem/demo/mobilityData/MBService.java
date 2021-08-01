@@ -30,7 +30,7 @@ public class MBService {
     }
 
 
-    public void batchInsert(String filePath) throws SQLException {
+    private void batchInsert(String filePath) throws SQLException {
         CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
         createMBDataByJdbc.run(filePath);
     }
