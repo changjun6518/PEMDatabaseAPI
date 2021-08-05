@@ -35,7 +35,7 @@ public class CreateMBDataByJdbc {
     }
 
     public void batchInsert2(String filePath, Long memberId) throws SQLException {
-        String sql = "INSERT INTO mobility_data(id,ymd,hms,unix_time,latitude,longitude,created_time,modified_time, member_id) VALUES (NULL,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO mobility_data(mobility_data_id,ymd,hms,unix_time,latitude,longitude,created_time,modified_time, member_id) VALUES (NULL,?,?,?,?,?,?,?,?)";
         try {
             st = con.prepareStatement(sql);
             con.setAutoCommit(false);

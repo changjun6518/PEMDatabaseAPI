@@ -2,14 +2,21 @@ package pem.demo.mobilityData;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import pem.demo.member.Member;
 import pem.demo.member.MemberService;
+import pem.demo.mobilityData.dto.MBResDto;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -44,5 +51,15 @@ public class MBService {
             batchInsert(filePath);
         }
     }
+
+
+    public Page<MBResDto> getMBData(int offset, int limit, String name) {
+        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.Direction.ASC, "unixTime");
+        Member userByUserName = memberService.findUserByUserName(name);
+        Page<MobilityData> mobilityDataByMemberName = mbRepository.findMobilityDataByMemberName(userByUserName.getId(), pageRequest);
+        return mobilityDataByMemberName.map(MBResDto::new);
+    }
+
+
 
 }

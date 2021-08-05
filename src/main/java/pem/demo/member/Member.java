@@ -1,5 +1,6 @@
 package pem.demo.member;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class Member {
 
     private String name;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MobilityData> mobilityDatas = new ArrayList<>();
 
     @OneToOne(mappedBy = "member")
