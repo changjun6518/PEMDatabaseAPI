@@ -12,7 +12,7 @@ import pem.demo.mobilityData.dto.MBResDto;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/mobility")
+@RequestMapping("/mobility")
 public class MBRestController {
 
     @Autowired

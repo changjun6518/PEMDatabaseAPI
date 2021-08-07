@@ -1,5 +1,6 @@
 package pem.demo.bff;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pem.demo.member.Member;
 import pem.demo.util.BaseTimeEntity;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class Bff extends BaseTimeEntity {
     @Id
     @GeneratedValue

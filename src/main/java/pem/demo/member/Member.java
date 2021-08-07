@@ -25,8 +25,9 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MobilityData> mobilityDatas = new ArrayList<>();
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Bff bff;
+
 
     public Member(String name) {
         this.name = name.toLowerCase();

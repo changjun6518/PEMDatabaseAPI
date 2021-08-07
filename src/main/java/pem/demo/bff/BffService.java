@@ -3,6 +3,7 @@ package pem.demo.bff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import pem.demo.bff.dto.BffResDto;
 import pem.demo.member.Member;
 import pem.demo.member.MemberService;
 
@@ -49,5 +50,19 @@ public class BffService {
             file.transferTo(dest); // 파일 업로드 작업 수행
             saveBffData(filePath);
         }
+    }
+
+    public BffResDto getBffData(String name) {
+        Bff bffByMemberName = bffRepository.findBffByMemberName(name);
+        return new BffResDto(bffByMemberName);
+    }
+
+    public ArrayList<BffResDto> getBffDataAll() {
+        List<Bff> bffAll = bffRepository.findAll();
+        ArrayList<BffResDto> bffResDtos = new ArrayList<>();
+        for (Bff bff : bffAll) {
+            bffResDtos.add(new BffResDto(bff));
+        }
+        return bffResDtos;
     }
 }
