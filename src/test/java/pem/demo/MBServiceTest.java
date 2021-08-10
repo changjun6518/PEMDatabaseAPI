@@ -16,11 +16,11 @@ public class MBServiceTest {
     @Autowired
     MBService mbService;
 
-    @Test
-    public void 테스트() {
-
-        String temp = "2020|03|01\t06:37:05\t1583012225\t37.545035\t126.922493";
-        MobilityData mb = new MobilityData(temp);
-        mbService.add(mb);
-    }
+//    @Test
+//    public void 테스트() {
+//
+//        String temp = "2020|03|01\t06:37:05\t1583012225\t37.545035\t126.922493";
+//        MobilityData mb = new MobilityData(temp);
+//        mbService.add(mb);
+//    }
 }

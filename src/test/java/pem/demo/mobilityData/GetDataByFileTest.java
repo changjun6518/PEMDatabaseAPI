@@ -12,9 +12,9 @@ class GetDataByFileTest {
 
     @Autowired
     MBRepository mbRepository;
-    @Test
-    public void userNameCheck() {
-        GetDataByFile getDataByFile = new GetDataByFile(mbRepository, memberService);
-        Member user = getDataByFile.getByUserNameOnFile("20200302_OMG");
-    }
+//    @Test
+//    public void userNameCheck() {
+//        GetDataByFile getDataByFile = new GetDataByFile(mbRepository, memberService);
+//        Member user = getDataByFile.getByUserNameOnFile("20200302_OMG");
+//    }
 }
