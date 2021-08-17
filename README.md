@@ -1,7 +1,5 @@
 # PEM Database API
 
-jenkins 실험333
-
 ### 기능 목록
 * MobilityData CRUD
   - [x] C
@@ -33,3 +31,5 @@ jenkins 실험333
   
 * bffData findAll할때 More than one row with the given identifier was found: 26,
 에러 발생 -> fetch.Lazy로 해결하였지만 이해하지못함
+  
+* jenkins로 자동 배포!
