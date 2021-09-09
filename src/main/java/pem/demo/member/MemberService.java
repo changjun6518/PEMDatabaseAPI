@@ -14,8 +14,18 @@ public class MemberService {
 
     @Transactional
     public Member findUserByUserName(String userName) {
-        Optional<Member> memberByName = memberRepository.findMemberByName(userName);
-        return memberByName.orElseGet(() -> memberRepository.save(new Member(userName)));
+        System.out.println("1");
+        Optional<Member> memberByName = memberRepository.findByName(userName);
+        System.out.println("2");
+
+        if (memberByName.isPresent()) {
+            System.out.println("3");
+
+            return memberByName.get();
+        }
+        System.out.println("4");
+
+        return memberRepository.saveAndFlush(new Member(userName));
     }
 
 

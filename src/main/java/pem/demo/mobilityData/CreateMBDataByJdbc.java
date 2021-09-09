@@ -1,5 +1,6 @@
 package pem.demo.mobilityData;
 
+import pem.demo.member.Member;
 import pem.demo.member.MemberService;
 
 import java.io.*;
@@ -84,10 +85,13 @@ public class CreateMBDataByJdbc {
             String[] dirNameSplit = filePath.split("_");
             userName = dirNameSplit[dirNameSplit.length - 1].replace(".txt", "");       //get user name (the last directory name)
             System.out.println("user : " + userName);
-            userId = memberService.findUserByUserName(userName).getId();
+            Member member = memberService.findUserByUserName(userName);
+            System.out.println("member : " + member.getName());
 
+            userId = member.getId();
         } catch (Exception e) {
-            System.out.println("not found user");
+            throw new IllegalArgumentException("어디야?");
+//            System.out.println("not found user");
         }
         return userId;
     }
