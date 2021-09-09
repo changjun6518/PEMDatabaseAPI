@@ -90,8 +90,7 @@ public class CreateMBDataByJdbc {
 
             userId = member.getId();
         } catch (Exception e) {
-            throw new IllegalArgumentException("어디야?");
-//            System.out.println("not found user");
+            System.out.println("not found user");
         }
         return userId;
     }
