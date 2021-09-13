@@ -8,7 +8,7 @@
   - [ ] D
   - [x] 배치 인서트
 * BffData CRUD
-
+* emClusteringData
 * 검증
     * 저장할 때 데이터가 중복되었는지 검증
     
