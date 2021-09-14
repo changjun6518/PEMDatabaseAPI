@@ -23,10 +23,10 @@ public class MBController {
 
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
-        model.addAttribute("data", "data 저장이 완료 되었습니다!");
         String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
         String basePath = rootPath + "\\" + "single";
         mbService.batchInsertByFiles(files, basePath);
+        model.addAttribute("data", basePath+"에 "+ "data 저장이 완료 되었습니다!");
         return "mobilityData";
     }
 }
