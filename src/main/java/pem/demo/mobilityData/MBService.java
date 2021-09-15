@@ -43,23 +43,12 @@ public class MBService {
     }
 
     public void batchInsertByFiles(List<MultipartFile> files, String basePath) throws IOException, SQLException {
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
-            for (MultipartFile file : files) {
-                String filePath = basePath + "\\" + file.getOriginalFilename();
-                File dest = new File(filePath);
-                System.out.println(filePath);
-                file.transferTo(dest); // 파일 업로드 작업 수행
-                batchInsert(filePath);
-            }
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            for (MultipartFile file : files) {
-                String filePath = basePath + "/" + file.getOriginalFilename();
-                File dest = new File(filePath);
-                System.out.println(filePath);
-                file.transferTo(dest); // 파일 업로드 작업 수행
-                batchInsert(filePath);
-            }
+        for (MultipartFile file : files) {
+            String filePath = basePath + "\\" + file.getOriginalFilename();
+            File dest = new File(filePath);
+            System.out.println(filePath);
+            file.transferTo(dest); // 파일 업로드 작업 수행
+            batchInsert(filePath);
         }
     }
 
