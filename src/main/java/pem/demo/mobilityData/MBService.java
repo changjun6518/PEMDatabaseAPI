@@ -13,6 +13,8 @@ import pem.demo.mobilityData.dto.MBResDto;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -61,6 +63,9 @@ public class MBService {
 //                batchInsert(filePath);
                 String path = System.getProperty("user.dir");
                 System.out.println("Working Directory = " + path);
+                Path relativePath = Paths.get("");
+                String path2 = relativePath.toAbsolutePath().toString();
+                System.out.println("Working Directory2 = " + path2);
             }
         }
     }
