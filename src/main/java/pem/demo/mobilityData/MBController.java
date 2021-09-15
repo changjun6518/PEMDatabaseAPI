@@ -29,7 +29,7 @@ public class MBController {
         if (os.contains("win")) {
             basePath = rootPath + "\\" + "single";
         } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            basePath = "/home/PEM" + "/" + "single";
+            basePath = rootPath + "/" + "single";
         }
         mbService.batchInsertByFiles(files, basePath);
         model.addAttribute("data", basePath+"에 "+ "data 저장이 완료 되었습니다!");
