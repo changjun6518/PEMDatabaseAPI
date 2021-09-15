@@ -24,8 +24,13 @@ public class MBController {
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
         String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+        String os = System.getProperty("os.name").toLowerCase();
         String basePath = "";
-        basePath = rootPath + "\\" + "single";
+        if (os.contains("win")) {
+            basePath = rootPath + "\\" + "single";
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            basePath = rootPath + "/" + "data";
+        }
         mbService.batchInsertByFiles(files, basePath);
         model.addAttribute("data", basePath+"에 "+ "data 저장이 완료 되었습니다!");
         return "mobilityData";
