@@ -59,7 +59,8 @@ public class MBService {
 //                System.out.println(filePath);
 //                file.transferTo(dest); // 파일 업로드 작업 수행
 //                batchInsert(filePath);
-                System.out.println("ssssssssssssssssssvvvvvvvvvvvvvvvvvaaaaaaaaaaaaalllll");
+                String path = System.getProperty("user.dir");
+                System.out.println("Working Directory = " + path);
             }
         }
     }
