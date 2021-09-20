@@ -56,16 +56,11 @@ public class MBService {
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
             for (MultipartFile file : files) {
-//                String filePath = basePath + "/" + file.getOriginalFilename();
-//                File dest = new File(filePath);
-//                System.out.println(filePath);
-//                file.transferTo(dest); // 파일 업로드 작업 수행
-//                batchInsert(filePath);
-                String path = System.getProperty("user.dir");
-                System.out.println("Working Directory = " + path);
-                Path relativePath = Paths.get("");
-                String path2 = relativePath.toAbsolutePath().toString();
-                System.out.println("Working Directory2 = " + path2);
+                String filePath = basePath + "/" + file.getOriginalFilename();
+                File dest = new File(filePath);
+                System.out.println(filePath);
+                file.transferTo(dest); // 파일 업로드 작업 수행
+                batchInsert(filePath);
             }
         }
     }
