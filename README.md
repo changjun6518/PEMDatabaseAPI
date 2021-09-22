@@ -1,17 +1,22 @@
 # PEM Database API
 
 ### 기능 목록
-* MobilityData CRUD
-  - [x] C
-  - [x] R
-  - [ ] U
-  - [ ] D
-  - [x] 배치 인서트
+* MobilityData
+  - [ ] mobility data 디비에 저장하기(시간, 위도, 경도 등)
+  - [ ] mobility data 가상머신에 저장하기 (폴더 구조 만들기 & os에 따른 경로 설정)
+  - [ ] MB data 가져오기
+  - [ ] MB data 저장하기 (raw level의 데이터 삽입할때)
+  - [ ] MB data 수정 및 삭제하기
+  - [ ] MB data 중복 검증하기
+* util
+  - fileUtil
+    - [x] basePath, osPathSign set하기
+    - [x] userName file을 통해서 뽑아내기
+    - [x] 필요한 폴더(rawdata/userName) 만들어주기
+    - [x] list_userName 만들기
 * BffData CRUD
 * emClusteringData
-* 검증
-    * 저장할 때 데이터가 중복되었는지 검증
-    
+  
 ### TODO List
 * CRUD
 * 배치 인서트
@@ -20,6 +25,7 @@
 * cascade type
 * user가 필요한가?
 * nosql써보는 건 어떤가?
+
 ### 어려웠던 점 & 아쉬운 점
 * 대량 데이터 Insert시 시간이 오래걸림
   * JPA로 해결하지 못하여 jdbc를 통해 시간 단축

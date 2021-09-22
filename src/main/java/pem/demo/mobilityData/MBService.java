@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pem.demo.member.Member;
 import pem.demo.member.MemberService;
 import pem.demo.mobilityData.dto.MBResDto;
+import pem.demo.util.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class MBService {
     @Autowired
     MemberService memberService;
 
+
     public void add(MobilityData mb) {
         mbRepository.save(mb);
     }
@@ -44,27 +46,12 @@ public class MBService {
         createMBDataByJdbc.run(filePath);
     }
 
-    public void batchInsertByFiles(List<MultipartFile> files, String basePath) throws IOException, SQLException {
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
-            for (MultipartFile file : files) {
-                String filePath = basePath + "\\" + file.getOriginalFilename();
-                File dest = new File(filePath);
-                System.out.println(filePath);
-                file.transferTo(dest); // 파일 업로드 작업 수행
-                batchInsert(filePath);
-            }
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            for (MultipartFile file : files) {
-                String filePath = basePath + "/" + file.getOriginalFilename();
-                File dest = new File(filePath);
-                System.out.println(filePath);
-                file.transferTo(dest); // 파일 업로드 작업 수행
-                batchInsert(filePath);
-            }
+    public void batchInsertByFiles(List<MultipartFile> files, FileUtil fileUtil) throws IOException, SQLException {
+        for (MultipartFile file : files) {
+            String filePath = createFile(file, fileUtil);
+            batchInsert(filePath);
         }
     }
-
 
     public Page<MBResDto> getMBData(int offset, int limit, String name) {
         PageRequest pageRequest = PageRequest.of(offset, limit, Sort.Direction.ASC, "unixTime");
@@ -74,5 +61,11 @@ public class MBService {
     }
 
 
-
+    private String createFile(MultipartFile file, FileUtil fileUtil) throws IOException {
+        String filePath = fileUtil.getRawdataPath() + fileUtil.getUserName() + fileUtil.getOsPathSign() + file.getOriginalFilename();
+        File dest = new File(filePath);
+        System.out.println(filePath);
+        file.transferTo(dest); // 파일 업로드 작업 수행
+        return filePath;
+    }
 }
