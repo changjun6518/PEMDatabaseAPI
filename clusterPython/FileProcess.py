@@ -79,7 +79,7 @@ class FileProcess:
 				else:
 					d = i
 
-		dir_path = os.getcwd() + "/clusterPython/result" + _f_name[s:d]
+		dir_path = os.getcwd() + "/result" + _f_name[s:d]
 		dir_name = _f_name[s + 1:d] + "_data"
 
 		path = dir_path + "/" + dir_name
@@ -91,7 +91,7 @@ class FileProcess:
 			f_name = _f_name
 			#f_in = open(f_name + 't', 'rt') ==>
 			#f_in = open("/Users/omingeun/Downloads/temp/em" + f_name , 'rt')
-			f_in = open(os.getcwd() +"/clusterPython"+ f_name , 'rt')
+			f_in = open(os.getcwd() + f_name , 'rt')
 			#start = _f_name.rfind("/")
 			#output_fname = './kmldata' + _f_name[start:]
 			output_fname = '/kmldata_' + _f_name[13:-3]#caution
@@ -160,7 +160,7 @@ class FileProcess:
 		self.SetFileDate(date_i)
 		
 		try:
-			f_in = open(os.getcwd() + "/clusterPython" + f_name, 'rt')
+			f_in = open(os.getcwd() + f_name, 'rt')
 
 			lines = f_in.readlines()
 			for line in lines:
@@ -251,7 +251,7 @@ class FileProcess:
 		#const char* f_name = temp.c_str();
 		f_name = temp
 		
-		dir_path = os.getcwd() + "/clusterPython/result/" + _fileName[-3:]
+		dir_path = os.getcwd() + "/result/" + _fileName[-3:]
 		dir_name1 = "results"
 		dir_name2 = "initialization"
 		'''
@@ -269,7 +269,7 @@ class FileProcess:
 		os.makedirs(path, exist_ok = True)
 
 		try:
-			if len(self.gpslist) is 0:
+			if len(self.gpslist) == 0:
 				return True
 			f_out = open(dir_path + f_name, "wt")
 
@@ -314,7 +314,7 @@ class FileProcess:
 		#const char* f_name = temp.c_str();
 		f_name = temp
 		
-		dir_path = os.getcwd() + "/clusterPython/result/" + _fileName[-3:]
+		dir_path = os.getcwd() + "/result/" + _fileName[-3:]
 		dir_name = "/results/initialization/visual"
 		'''
 		try :
@@ -394,7 +394,7 @@ class FileProcess:
 			#//const char* f_name = ("./results/clustering/" + _fileName + "_Clustering_Result.json").c_str();
 			f_name = temp
 		
-			dir_path = os.getcwd() + "/clusterPython/result/" + _fileName[-3:]
+			dir_path = os.getcwd() + "/result/" + _fileName[-3:]
 			dir_name = "/results/integratedJSON"
 			'''
 			try :
@@ -553,7 +553,7 @@ class FileProcess:
 		#//const char* f_name = ("./results/clustering/" + _fileName + "_Clustering_Result.txt").c_str();
 		f_name = temp
 	
-		dir_path = os.getcwd() + "/clusterPython/result/" + _fileName[-3:]
+		dir_path = os.getcwd() + "/result/" + _fileName[-3:]
 		dir_name = "/results/clustering"
 		'''
 		try :
@@ -660,7 +660,7 @@ class FileProcess:
 		#//const char* f_name = ("./results/clustering/visual/" + _fileName + "_Clustering_VisualResult.kml").c_str();
 		f_name = temp
 	
-		dir_path = os.getcwd() + "/clusterPython/result/" + _fileName[-3:]
+		dir_path = os.getcwd() + "/result/" + _fileName[-3:]
 		dir_name = "/results/clustering/visual"
 		'''
 		try :
@@ -729,7 +729,7 @@ class FileProcess:
 		#out<<"All";
 		#_fileName = out.str() + "_" + fileName;
 		_fileName = "All" + "_" + self.fileName
-		dir_path = os.getcwd() + "/clusterPython/result/" + _fileName[-3:]
+		dir_path = os.getcwd() + "/result/" + _fileName[-3:]
 
 		f_name = "/results/clustering/" + _fileName + "_TimedTrace_Result.txt"
 	
