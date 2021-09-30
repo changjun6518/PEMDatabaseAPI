@@ -1,5 +1,6 @@
 package pem.demo.util;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PythonExecutionTest {
 
     @Test
+    @Disabled
     @Rollback(value = false)
     public void executePy() throws IOException, InterruptedException {
         String command = "C:\\\\Users\\\\ChangJun.Choi\\\\Anaconda3\\\\python.exe";
