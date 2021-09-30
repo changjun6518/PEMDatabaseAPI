@@ -1,3 +1,5 @@
+# coding=<utf-8>
+
 
 # coding: utf-8
 
@@ -23,12 +25,13 @@ def main(_argv):
 	#sys.path.append('/Users/Downloads/temp/em')
 	sys.path.append('.')
 	locAnalysis = LA.LocationAnalysis(len(_argv), _argv)
-	
+	print(_argv)
 	if locAnalysis.GetMode() == 0:
 		print("please check the arguments")
 	elif locAnalysis.GetMode() == 1:
 		locAnalysis.ShowUsage()
 	elif locAnalysis.GetMode() == 2:
+		print ("good")
 		if locAnalysis.ConvertRawToKML():
 			print("success converting rawdata to kmldata")
 		else:
@@ -43,6 +46,7 @@ def main(_argv):
 
 if __name__ == "__main__":
 	main(sys.argv)
+	# main(["main.py","-t"])
 
 
 # In[ ]:

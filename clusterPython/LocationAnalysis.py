@@ -59,6 +59,7 @@ class LocationAnalysis:
 		self.parameter = _argv
 		self.outputName = "default"
 		self.option = "default"
+		self.fileListPath = ""			# chang
 		self.SetMode(_argc)
 		self.fileList = []
 		self.fileProcessor = FP.FileProcess()
@@ -68,16 +69,18 @@ class LocationAnalysis:
 	def SetMode(self, _mode):
 		if _mode == 1:
 			self.mode = 1
-		elif _mode == 2:
+		elif _mode == 3:	# chang
 			temp_option = self.parameter[1]
 			self.SetOption(temp_option)
+			self.fileListPath = self.parameter[2]	# chang
 			if self.option == "-t":
 				self.mode = 2
 			else:
 				self.mode = 0
-		elif _mode == 3:
+		elif _mode == 4:	# chang
 			temp_option = self.parameter[1]
 			temp_outputName = self.parameter[2]
+			self.fileListPath = self.parameter[3]	# chang
 			self.SetOption(temp_option)
 			self.SetOutputName(temp_outputName)
 			if self.option == "-a":
@@ -132,16 +135,30 @@ class LocationAnalysis:
 				#print(buf)
 		except EOFError:
 				pass
-   
+
+
+	def LoadList2(self):
+		f = open(self.fileListPath, 'r')
+		lines = f.readlines()
+		for line in lines:
+			buf = line[1:-1]
+			if buf[len(buf) - 1] == 'x':
+				buf += 't'
+			self.SetFileList(buf)
+		print("fileList", self.fileList)
+		f.close()
+
 	def ConvertRawToKML(self):
-		self.LoadList()
+		# self.LoadList()
+		self.LoadList2()
 		if self.fileProcessor.RawdataToKML(self.fileList) is False:
 			return False
 		
 		return True
 	
 	def DailyAnalysis(self):
-		self.LoadList()
+		# self.LoadList()
+		self.LoadList2()
 		self.fileProcessor.SetFileName(self.GetOutputName())
 		
 		#daily analysis

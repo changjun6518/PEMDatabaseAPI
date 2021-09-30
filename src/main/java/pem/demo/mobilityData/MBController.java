@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pem.demo.util.FileUtil;
+import pem.demo.util.PythonExecution;
 
 import javax.swing.filechooser.FileSystemView;
 import java.util.List;
@@ -20,8 +21,6 @@ public class MBController {
         model.addAttribute("data", "chang");
         return "mobilityData";
     }
-
-
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
         String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
@@ -37,6 +36,7 @@ public class MBController {
 
             mbService.batchInsertByFiles(files, fileUtil);
             fileUtil.createListFile();
+            PythonExecution.convertRawToKML(userName);
         } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
             basePath = "/home/PEM/jenkins/workspace/devOps/clusterPython/";
             String userName = fileUtil.getUserNameBy(files.get(0));
