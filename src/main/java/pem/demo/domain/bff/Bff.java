@@ -1,8 +1,8 @@
-package pem.demo.bff;
+package pem.demo.domain.bff;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pem.demo.member.Member;
+import pem.demo.domain.member.Member;
 import pem.demo.util.BaseTimeEntity;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package pem.demo.member;
+package pem.demo.domain.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

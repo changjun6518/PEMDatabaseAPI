@@ -1,21 +1,8 @@
-package pem.demo.bff;
+package pem.demo.domain.bff;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pem.demo.member.Member;
-import pem.demo.member.MemberService;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import pem.demo.domain.member.MemberService;
 
 @SpringBootTest
 class BffServiceTest {

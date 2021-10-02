@@ -1,4 +1,4 @@
-package pem.demo.member;
+package pem.demo.domain.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

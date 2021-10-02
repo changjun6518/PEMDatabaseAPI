@@ -1,11 +1,10 @@
-package pem.demo.member;
+package pem.demo.domain.member;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pem.demo.bff.Bff;
-import pem.demo.mobilityData.MobilityData;
+import pem.demo.domain.bff.Bff;
+import pem.demo.domain.mobilityData.MobilityData;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class Member {
     private String name;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MobilityData> mobilityDatas = new ArrayList<>();
+    private final List<MobilityData> mobilityDatas = new ArrayList<>();
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Bff bff;

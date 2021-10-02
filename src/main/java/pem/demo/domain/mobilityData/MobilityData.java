@@ -1,10 +1,9 @@
-package pem.demo.mobilityData;
+package pem.demo.domain.mobilityData;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pem.demo.member.Member;
+import pem.demo.domain.member.Member;
 import pem.demo.util.BaseTimeEntity;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
-package pem.demo.mobilityData;
+package pem.demo.domain.mobilityData;
 
-import pem.demo.member.Member;
-import pem.demo.member.MemberService;
+import pem.demo.domain.member.Member;
+import pem.demo.domain.member.MemberService;
 
 import java.io.*;
 import java.sql.*;

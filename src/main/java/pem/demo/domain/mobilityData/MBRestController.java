@@ -1,4 +1,4 @@
-package pem.demo.mobilityData;
+package pem.demo.domain.mobilityData;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.stylesheets.LinkStyle;
-import pem.demo.mobilityData.dto.MBResDto;
-
-import java.util.List;
+import pem.demo.domain.mobilityData.dto.MBResDto;
 
 @RestController
 @RequestMapping("/mobility")

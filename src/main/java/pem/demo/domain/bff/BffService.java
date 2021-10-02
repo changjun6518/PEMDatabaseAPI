@@ -1,11 +1,11 @@
-package pem.demo.bff;
+package pem.demo.domain.bff;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import pem.demo.bff.dto.BffResDto;
-import pem.demo.member.Member;
-import pem.demo.member.MemberService;
+import pem.demo.domain.bff.dto.BffResDto;
+import pem.demo.domain.member.Member;
+import pem.demo.domain.member.MemberService;
 
 import java.io.BufferedReader;
 import java.io.File;

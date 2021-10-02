@@ -1,7 +1,7 @@
-package pem.demo.bff.dto;
+package pem.demo.domain.bff.dto;
 
 import lombok.Data;
-import pem.demo.bff.Bff;
+import pem.demo.domain.bff.Bff;
 
 @Data
 public class BffResDto {

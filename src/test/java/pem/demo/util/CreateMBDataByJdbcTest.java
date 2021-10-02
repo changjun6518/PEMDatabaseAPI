@@ -1,12 +1,8 @@
 package pem.demo.util;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pem.demo.member.MemberService;
-import pem.demo.mobilityData.CreateMBDataByJdbc;
-
-import java.sql.SQLException;
+import pem.demo.domain.member.MemberService;
 
 @SpringBootTest
 class CreateMBDataByJdbcTest {
