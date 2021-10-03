@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pem.demo.domain.bff.Bff;
+import pem.demo.domain.clustering.Clustering;
 import pem.demo.domain.mobilityData.MobilityData;
 
 import javax.persistence.*;
@@ -26,6 +27,10 @@ public class Member {
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Bff bff;
+
+    @OneToMany
+    @JoinColumn(name = "cluster_id")
+    private final List<Clustering> clusterings = new ArrayList<>();
 
 
     public Member(String name) {
