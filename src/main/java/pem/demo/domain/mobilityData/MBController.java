@@ -29,7 +29,7 @@ public class MBController {
         FileUtil fileUtil = new FileUtil();
         if (os.contains("win")) {
             basePath = rootPath + "\\pemDB\\clusterPython\\";
-            String userName = fileUtil.getUserNameBy(files.get(0));
+            String userName = fileUtil.getUserNameByRawDataFile(files.get(0));
             fileUtil.setBasePathAndOsPathSign(basePath, "\\");
             fileUtil.checkNecessaryFolder(basePath, userName);
 
@@ -39,7 +39,7 @@ public class MBController {
 //            PythonExecution.convertRawToKML(userName);
         } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
             basePath = "/home/PEM/jenkins/workspace/devOps/clusterPython/";
-            String userName = fileUtil.getUserNameBy(files.get(0));
+            String userName = fileUtil.getUserNameByRawDataFile(files.get(0));
             fileUtil.setBasePathAndOsPathSign(basePath, "/");
             fileUtil.checkNecessaryFolder(basePath, userName);
 
