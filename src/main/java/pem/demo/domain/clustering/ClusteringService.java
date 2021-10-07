@@ -112,7 +112,7 @@ public class ClusteringService {
     public void autoGetJsonFile() throws IOException {
 //        String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
 //        String path = rootPath + "/pemDB/clusterPython/result/";
-        String path = "/home/PEM/jenkins/workspace/devOps/clusterPython/result";
+        String path = "/home/PEM/jenkins/workspace/devOps/clusterPython/result/";
         File dir = new File(path);
         String files[] = dir.list();
 
