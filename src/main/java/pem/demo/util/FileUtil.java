@@ -14,6 +14,7 @@ public class FileUtil {
     private String listPath;
     private String osPathSign;
     private String userName;
+    private String integratedJsonPath;
     private ArrayList<String> necessaryFolders = new ArrayList<>(Arrays.asList("rawdata"));
 
     public void setBasePathAndOsPathSign(String basePath, String osPathSign) {
@@ -23,10 +24,17 @@ public class FileUtil {
         this.listPath = basePath + "list" + osPathSign;
     }
     
-    public String getUserNameBy(MultipartFile file) {
+    public String getUserNameByRawDataFile(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
         String[] splitFileName = originalFilename.split("_");
         userName = splitFileName[splitFileName.length - 1].replace(".txt", "");
+        return userName;
+    }
+
+    public String getUserNameByIntegratedJsonFile(MultipartFile file) {
+        String originalFilename = file.getOriginalFilename();
+        String[] splitFileName = originalFilename.split("_");
+        userName = splitFileName[1];
         return userName;
     }
 

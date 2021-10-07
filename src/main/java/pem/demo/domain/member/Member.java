@@ -28,8 +28,7 @@ public class Member {
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Bff bff;
 
-    @OneToMany
-    @JoinColumn(name = "cluster_id")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private final List<Clustering> clusterings = new ArrayList<>();
 
 

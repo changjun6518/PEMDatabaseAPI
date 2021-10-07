@@ -36,7 +36,7 @@ public class MBController {
 
             mbService.batchInsertByFiles(files, fileUtil);
             fileUtil.createListFile();
-            PythonExecution.convertRawToKML(userName);
+//            PythonExecution.convertRawToKML(userName);
         } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
             basePath = "/home/PEM/jenkins/workspace/devOps/clusterPython/";
             String userName = fileUtil.getUserNameBy(files.get(0));
