@@ -30,6 +30,7 @@ public class MBController {
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
         jdbcService.setNecessaryFileAndBatchInsert(files);
+//        mbService.setNecessaryFileAndBatchInsert(files);
 
         model.addAttribute("data", "data 저장이 완료 되었습니다!");
         return "mobilityData";

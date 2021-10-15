@@ -18,7 +18,7 @@ public class JdbcService {
     private static final String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
     private static String basePath;
     private final FileUtil fileUtil = new FileUtil();
-    private final MemberService memberService;
+    protected final MemberService memberService;
 
     public JdbcService(MemberService memberService) {
         this.memberService = memberService;
@@ -30,24 +30,26 @@ public class JdbcService {
         fileUtil.setBasePath(basePath);
         fileUtil.checkNecessaryFolder(basePath, userName); // rawdata 폴더에 User 만들어주는 부분
 
-        batchInsertByFiles(files, fileUtil);
+        batchInsertByFiles(files);
         fileUtil.createListFile();                      // List_User를 만들어주는 부분
 
+        // 나중에 이부분 트렌젝션 하게 처리해야함 AOP?
     }
 
-    private void batchInsertByFiles(List<MultipartFile> files, FileUtil fileUtil) throws IOException, SQLException {
+    protected void batchInsertByFiles(List<MultipartFile> files) throws IOException, SQLException {
         for (MultipartFile file : files) {
-            String filePath = createFile(file, fileUtil);
+            String filePath = createFile(file);
             batchInsert(filePath);
         }
     }
 
-    private void batchInsert(String filePath) throws SQLException {
+    protected void batchInsert(String filePath) throws SQLException {
         CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
         createMBDataByJdbc.run(filePath);
     }
 
-    private String createFile(MultipartFile file, FileUtil fileUtil) throws IOException {
+
+    protected String createFile(MultipartFile file) throws IOException {
         String filePath = fileUtil.getRawdataPath() + fileUtil.getUserName() + fileUtil.getOsPathSign() + file.getOriginalFilename();
         File dest = new File(filePath);
         System.out.println(filePath);
@@ -55,7 +57,7 @@ public class JdbcService {
         return filePath;
     }
 
-    private void setBasePath() {
+    protected void setBasePath() {
         if (os.contains("win")) {
             basePath = rootPath + "/pemDB/clusterPython/";
         }

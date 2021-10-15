@@ -1,5 +1,11 @@
 # PEM Database API
 
+### To-Do-List
+- mbService에서 jpa를 사용해서 데이터를 저장하려고 함
+- 근데 쿼리가 엄청 많이 나감 saveAll    vs     jdbc batch insert 는 1초컷!
+- 배치 처리 해주면 시간이 감소하는지 확인 (OMG, 1/6 데이터 기준 - 17초 걸렸음)
+
+
 ### 기능 목록
 * MobilityData
   - [ ] mobility data 디비에 저장하기(시간, 위도, 경도 등)
