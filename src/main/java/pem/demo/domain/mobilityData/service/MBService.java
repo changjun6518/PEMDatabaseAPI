@@ -1,4 +1,4 @@
-package pem.demo.domain.mobilityData;
+package pem.demo.domain.mobilityData.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,16 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberService;
+import pem.demo.domain.mobilityData.GetDataByFile;
+import pem.demo.domain.mobilityData.dao.MBRepository;
+import pem.demo.domain.mobilityData.dao.MobilityData;
 import pem.demo.domain.mobilityData.dto.MBResDto;
-import pem.demo.util.FileUtil;
-
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

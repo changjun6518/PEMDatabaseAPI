@@ -2,6 +2,7 @@ package pem.demo.domain.mobilityData;
 
 import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberService;
+import pem.demo.domain.mobilityData.dao.MobilityData;
 
 import java.io.*;
 import java.sql.*;

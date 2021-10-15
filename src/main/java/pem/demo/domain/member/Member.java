@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pem.demo.domain.bff.Bff;
 import pem.demo.domain.clustering.Clustering;
-import pem.demo.domain.mobilityData.MobilityData;
+import pem.demo.domain.mobilityData.dao.MobilityData;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package pem.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pem.demo.domain.mobilityData.MBService;
+import pem.demo.domain.mobilityData.service.MBService;
 
 public class MBServiceTest {
 

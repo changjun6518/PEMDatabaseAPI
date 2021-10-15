@@ -1,7 +1,7 @@
 package pem.demo.domain.mobilityData.dto;
 
 import lombok.Data;
-import pem.demo.domain.mobilityData.MobilityData;
+import pem.demo.domain.mobilityData.dao.MobilityData;
 
 @Data
 public class MBResDto {

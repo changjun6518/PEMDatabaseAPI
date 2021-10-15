@@ -3,9 +3,10 @@ package pem.demo.domain.mobilityData;
 import org.springframework.stereotype.Component;
 import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberService;
+import pem.demo.domain.mobilityData.dao.MBRepository;
+import pem.demo.domain.mobilityData.dao.MobilityData;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;

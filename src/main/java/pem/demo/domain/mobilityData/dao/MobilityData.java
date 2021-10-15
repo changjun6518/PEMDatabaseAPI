@@ -1,4 +1,4 @@
-package pem.demo.domain.mobilityData;
+package pem.demo.domain.mobilityData.dao;
 
 import lombok.AccessLevel;
 import lombok.Getter;

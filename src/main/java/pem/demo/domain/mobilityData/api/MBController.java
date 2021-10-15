@@ -1,14 +1,13 @@
-package pem.demo.domain.mobilityData;
+package pem.demo.domain.mobilityData.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pem.demo.util.FileUtil;
-import pem.demo.util.PythonExecution;
+import pem.demo.domain.mobilityData.service.JdbcService;
+import pem.demo.domain.mobilityData.service.MBService;
 
-import javax.swing.filechooser.FileSystemView;
 import java.util.List;
 
 @Controller

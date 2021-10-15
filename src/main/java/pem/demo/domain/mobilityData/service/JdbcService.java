@@ -1,10 +1,9 @@
-package pem.demo.domain.mobilityData;
+package pem.demo.domain.mobilityData.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import pem.demo.domain.member.MemberService;
+import pem.demo.domain.mobilityData.CreateMBDataByJdbc;
 import pem.demo.util.FileUtil;
 
 import javax.swing.filechooser.FileSystemView;
