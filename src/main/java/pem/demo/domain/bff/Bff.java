@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Bff extends BaseTimeEntity {
+public class Bff {
     @Id
     @GeneratedValue
     @Column(name = "bff_id")

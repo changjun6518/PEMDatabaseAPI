@@ -12,14 +12,13 @@ public class FileUtil {
     private String basePath;
     private String rawdataPath;
     private String listPath;
-    private String osPathSign;
+    private final String osPathSign= "/";
     private String userName;
     private String integratedJsonPath;
     private ArrayList<String> necessaryFolders = new ArrayList<>(Arrays.asList("rawdata"));
 
-    public void setBasePathAndOsPathSign(String basePath, String osPathSign) {
+    public void setBasePath(String basePath) {
         this.basePath = basePath;
-        this.osPathSign = osPathSign;
         this.rawdataPath = basePath + "rawdata" + osPathSign;
         this.listPath = basePath + "list" + osPathSign;
     }

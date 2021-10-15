@@ -16,6 +16,12 @@ public class MBController {
     @Autowired
     MBService mbService;
 
+    private final JdbcService jdbcService;
+
+    public MBController(JdbcService jdbcService) {
+        this.jdbcService = jdbcService;
+    }
+
     @GetMapping("getMobilityData")
     public String saveDataByFile(Model model) {
         model.addAttribute("data", "chang");
@@ -23,31 +29,9 @@ public class MBController {
     }
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
-        String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-        String os = System.getProperty("os.name").toLowerCase();
-        String basePath = "";
-        FileUtil fileUtil = new FileUtil();
-        if (os.contains("win")) {
-            basePath = rootPath + "\\pemDB\\clusterPython\\";
-            String userName = fileUtil.getUserNameByRawDataFile(files.get(0));
-            fileUtil.setBasePathAndOsPathSign(basePath, "\\");
-            fileUtil.checkNecessaryFolder(basePath, userName);
+        jdbcService.setNecessaryFileAndBatchInsert(files);
 
-
-            mbService.batchInsertByFiles(files, fileUtil);
-            fileUtil.createListFile();
-//            PythonExecution.convertRawToKML(userName);
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-            basePath = "/home/PEM/jenkins/workspace/devOps/clusterPython/";
-            String userName = fileUtil.getUserNameByRawDataFile(files.get(0));
-            fileUtil.setBasePathAndOsPathSign(basePath, "/");
-            fileUtil.checkNecessaryFolder(basePath, userName);
-
-
-            mbService.batchInsertByFiles(files, fileUtil);
-            fileUtil.createListFile();
-        }
-        model.addAttribute("data", basePath+"에 "+ "data 저장이 완료 되었습니다!");
+        model.addAttribute("data", "data 저장이 완료 되었습니다!");
         return "mobilityData";
     }
 }
