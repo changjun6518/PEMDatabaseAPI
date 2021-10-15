@@ -36,32 +36,10 @@ public class MBService {
         getDataByFile.run(filePath);
     }
 
-
-    private void batchInsert(String filePath) throws SQLException {
-        CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
-        createMBDataByJdbc.run(filePath);
-    }
-
-    public void batchInsertByFiles(List<MultipartFile> files, FileUtil fileUtil) throws IOException, SQLException {
-        for (MultipartFile file : files) {
-            String filePath = createFile(file, fileUtil);
-            batchInsert(filePath);
-        }
-    }
-
     public Page<MBResDto> getMBData(int offset, int limit, String name) {
         PageRequest pageRequest = PageRequest.of(offset, limit, Sort.Direction.ASC, "unixTime");
         Member userByUserName = memberService.findUserByUserName(name);
         Page<MobilityData> mobilityDataByMemberName = mbRepository.findMobilityDataByMemberName(userByUserName.getId(), pageRequest);
         return mobilityDataByMemberName.map(MBResDto::new);
-    }
-
-
-    private String createFile(MultipartFile file, FileUtil fileUtil) throws IOException {
-        String filePath = fileUtil.getRawdataPath() + fileUtil.getUserName() + fileUtil.getOsPathSign() + file.getOriginalFilename();
-        File dest = new File(filePath);
-        System.out.println(filePath);
-        file.transferTo(dest); // 파일 업로드 작업 수행
-        return filePath;
     }
 }

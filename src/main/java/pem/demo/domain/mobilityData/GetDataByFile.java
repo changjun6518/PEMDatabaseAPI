@@ -36,7 +36,7 @@ public class GetDataByFile {
 
 
     public void saveData(String filePath, Member user) {
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
         String line;
         List<MobilityData> mobilityDataList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
