@@ -13,9 +13,18 @@ import javax.persistence.*;
 @Getter
 public class MobilityData {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE
+                    ,generator = "GENERATOR_NAME")
+    @TableGenerator(
+            name = "GENERATOR_NAME",
+            table = "sequence_table",
+            pkColumnName = "sequence_name",
+            valueColumnName = "next_val",
+            allocationSize = 1000
+    )
     @Column(name = "mobility_data_id")
     private Long id;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -15,7 +15,8 @@ import java.util.List;
 @Component
 public class JdbcService {
     private static final String os = System.getProperty("os.name").toLowerCase();
-    private static final String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+//    private static final String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+    private static final String rootPath = "D:/코딩/자바";
     private static String basePath;
     private final FileUtil fileUtil = new FileUtil();
     protected final MemberService memberService;

@@ -12,12 +12,13 @@ import java.util.List;
 
 @Controller
 public class MBController {
-    @Autowired
-    MBService mbService;
+
+    private final MBService mbService;
 
     private final JdbcService jdbcService;
 
-    public MBController(JdbcService jdbcService) {
+    public MBController(MBService mbService, JdbcService jdbcService) {
+        this.mbService = mbService;
         this.jdbcService = jdbcService;
     }
 
@@ -29,8 +30,8 @@ public class MBController {
 
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
-        jdbcService.setNecessaryFileAndBatchInsert(files);
-//        mbService.setNecessaryFileAndBatchInsert(files);
+//        jdbcService.setNecessaryFileAndBatchInsert(files);
+        mbService.setNecessaryFileAndBatchInsert(files);
 
         model.addAttribute("data", "data 저장이 완료 되었습니다!");
         return "mobilityData";
