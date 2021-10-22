@@ -1,20 +1,18 @@
 # PEM Database API
 
 ### To-Do-List
-- mbService에서 jpa를 사용해서 데이터를 저장하려고 함
-- 근데 쿼리가 엄청 많이 나감 saveAll    vs     jdbc batch insert 는 1초컷!
-- 배치 처리 해주면 시간이 감소하는지 확인 (OMG, 1/6 데이터 기준 - 17초 걸렸음)
-- 
+- 수정 및 삭제?
+- 어떤 작업을 할 건지 중간 점검이 필요
 
 
 ### 기능 목록
 * MobilityData
-  - [ ] mobility data 디비에 저장하기(시간, 위도, 경도 등)
-  - [ ] mobility data 가상머신에 저장하기 (폴더 구조 만들기 & os에 따른 경로 설정)
-  - [ ] MB data 가져오기
-  - [ ] MB data 저장하기 (raw level의 데이터 삽입할때)
+  - [x] mobility data 디비에 저장하기(시간, 위도, 경도 등)
+  - [x] mobility data 가상머신에 저장하기 (폴더 구조 만들기 & os에 따른 경로 설정)
+  - [x] MB data 가져오기
+  - [x] MB data 저장하기 (raw level의 데이터 삽입할때)
   - [ ] MB data 수정 및 삭제하기
-  - [ ] MB data 중복 검증하기
+  - [x] MB data 중복 검증하기
 * util
   - fileUtil
     - [x] basePath, osPathSign set하기

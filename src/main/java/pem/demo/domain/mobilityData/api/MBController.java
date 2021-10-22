@@ -33,7 +33,7 @@ public class MBController {
 //        jdbcService.setNecessaryFileAndBatchInsert(files);
         mbService.setNecessaryFileAndBatchInsert(files);
 
-        model.addAttribute("data", "data 저장이 완료 되었습니다!");
+        model.addAttribute("data", mbService.getMessage());
         return "mobilityData";
     }
 }

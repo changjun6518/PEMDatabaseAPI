@@ -27,7 +27,7 @@ public class MBService extends JdbcService{
     private final MBRepository mbRepository;
 
     public MBService(MemberService memberService, MBRepository mbRepository) {
-        super(memberService);
+        super(memberService, mbRepository);
         this.mbRepository = mbRepository;
     }
 

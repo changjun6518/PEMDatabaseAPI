@@ -4,25 +4,34 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import pem.demo.domain.member.MemberService;
 import pem.demo.domain.mobilityData.CreateMBDataByJdbc;
+import pem.demo.domain.mobilityData.dao.MBRepository;
+import pem.demo.domain.mobilityData.dao.MobilityData;
+import pem.demo.domain.mobilityData.exception.DuplicationException;
 import pem.demo.util.FileUtil;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class JdbcService {
-    private static final String os = System.getProperty("os.name").toLowerCase();
-//    private static final String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-    private static final String rootPath = "D:/코딩/자바";
-    private static String basePath;
-    private final FileUtil fileUtil = new FileUtil();
     protected final MemberService memberService;
+    protected final MBRepository mbRepository;
+    private static final String os = System.getProperty("os.name").toLowerCase();
+    private static final String rootPath = "D:/코딩/자바";
+    private static final Integer YMD_INDEX = 0;
+    private final FileUtil fileUtil = new FileUtil();
+    private static String basePath;
+    private static StringBuilder message;
+    private static StringBuilder duplicatedFile = new StringBuilder();
 
-    public JdbcService(MemberService memberService) {
+    public JdbcService(MemberService memberService, MBRepository mbRepository) {
         this.memberService = memberService;
+        this.mbRepository = mbRepository;
         setBasePath();
     }
 
@@ -38,9 +47,21 @@ public class JdbcService {
     }
 
     protected void batchInsertByFiles(List<MultipartFile> files) throws IOException, SQLException {
-        for (MultipartFile file : files) {
-            String filePath = createFile(file);
-            batchInsert(filePath);
+        message = new StringBuilder("data 저장이 완료 되었습니다!");
+        try {
+            for (MultipartFile file : files) {
+                if (validateDuplicate(file.getOriginalFilename())) {
+                    initMessage();
+                    duplicatedFile = new StringBuilder();
+                    duplicatedFile.append(file.getOriginalFilename());
+                    throw new DuplicationException();
+                }
+                String filePath = createFile(file);
+                batchInsert(filePath);
+            }
+        } catch (DuplicationException e) {
+            settingMessage(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -65,5 +86,29 @@ public class JdbcService {
         else if (os.contains("nix") || os.contains("nux") || os.contains("aix")){
         basePath = "/home/PEM/jenkins/workspace/devOps/clusterPython/";
         }
+    }
+
+    private boolean validateDuplicate(String fileName) {
+        String ymd = fileName.split("_")[YMD_INDEX];
+        String convertedYmd = ymd.substring(0, 4) + "|" + ymd.substring(4, 6) + "|" + ymd.substring(6, 8);
+
+        MobilityData topByYmd = mbRepository.findFirstByYmd(convertedYmd);
+        return topByYmd != null;
+    }
+
+
+    public String getMessage() {
+        return message.toString();
+    }
+
+    private void initMessage() {
+            message.setLength(0);
+    }
+
+    private void settingMessage(DuplicationException e) {
+        message.append(duplicatedFile);
+        message.append(" , ");
+        message.append(e.getMessage());
+        message.append("\n");
     }
 }
