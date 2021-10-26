@@ -36,4 +36,6 @@ public class MBController {
         model.addAttribute("data", mbService.getMessage());
         return "mobilityData";
     }
+
+//    @DeleteMapping
 }

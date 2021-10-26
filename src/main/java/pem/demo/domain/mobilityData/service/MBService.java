@@ -68,4 +68,10 @@ public class MBService extends JdbcService{
         return mobilityDataByMemberName.map(MBResDto::new);
     }
 
+
+    public void deleteMBData(String ymd) {
+        List<MobilityData> mbDataList = mbRepository.findAllByYmd(ymd);
+        mbRepository.deleteAll(mbDataList);
+    }
+
 }

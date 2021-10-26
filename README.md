@@ -13,14 +13,14 @@
   - [x] MB data 저장하기 (raw level의 데이터 삽입할때)
   - [ ] MB data 수정 및 삭제하기
   - [x] MB data 중복 검증하기
+* BffData CRUD
+* ClusteringData
 * util
   - fileUtil
     - [x] basePath, osPathSign set하기
     - [x] userName file을 통해서 뽑아내기
     - [x] 필요한 폴더(rawdata/userName) 만들어주기
     - [x] list_userName 만들기
-* BffData CRUD
-* emClusteringData
   
 ### TODO List
 * CRUD
