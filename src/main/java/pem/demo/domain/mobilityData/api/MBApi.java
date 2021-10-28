@@ -12,7 +12,7 @@ import pem.demo.domain.mobilityData.service.MBService;
 
 @RestController
 @RequestMapping("/mobility")
-public class MBRestController {
+public class MBApi {
 
     @Autowired
     MBService mbService;
