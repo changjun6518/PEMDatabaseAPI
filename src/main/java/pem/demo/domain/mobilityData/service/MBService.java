@@ -21,6 +21,7 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class MBService extends JdbcService{
@@ -40,7 +41,7 @@ public class MBService extends JdbcService{
     protected void batchInsert(String filePath) throws SQLException {
 
         String[] dirNameSplit = filePath.split("_");
-        String userName = dirNameSplit[dirNameSplit.length - 1].replace(".txt", "");       //get user name (the last directory name)
+        String userName = dirNameSplit[dirNameSplit.length - 1].replace(".txt", "").toLowerCase();       //get user name (the last directory name)
         Member member = memberService.findUserByUserName(userName);
         ArrayList<MobilityData> mobilityDataList = new ArrayList<>();
         long start = System.currentTimeMillis();

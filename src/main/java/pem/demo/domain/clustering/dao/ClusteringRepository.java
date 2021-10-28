@@ -1,4 +1,4 @@
-package pem.demo.domain.clustering;
+package pem.demo.domain.clustering.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

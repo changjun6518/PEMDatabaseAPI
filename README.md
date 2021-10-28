@@ -1,9 +1,7 @@
 # PEM Database API
 
 ### To-Do-List
-- 수정 및 삭제?
-- 어떤 작업을 할 건지 중간 점검이 필요
-
+- 모든 데이터 디비에 저장 시키자
 
 ### 기능 목록
 * MobilityData

@@ -3,6 +3,7 @@ package pem.demo.domain.clustering;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pem.demo.domain.clustering.service.ClusteringService;
 
 import javax.annotation.PostConstruct;
 import java.util.Timer;

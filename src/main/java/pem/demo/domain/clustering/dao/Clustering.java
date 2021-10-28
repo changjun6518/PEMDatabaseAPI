@@ -1,5 +1,6 @@
-package pem.demo.domain.clustering;
+package pem.demo.domain.clustering.dao;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

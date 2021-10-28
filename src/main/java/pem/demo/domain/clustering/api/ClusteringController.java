@@ -1,14 +1,13 @@
-package pem.demo.domain.clustering;
+package pem.demo.domain.clustering.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pem.demo.domain.clustering.service.ClusteringService;
 import pem.demo.util.FileUtil;
-import pem.demo.util.PythonExecution;
 
-import javax.swing.filechooser.FileSystemView;
 import java.util.List;
 
 @Controller

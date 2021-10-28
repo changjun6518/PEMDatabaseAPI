@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pem.demo.domain.bff.Bff;
-import pem.demo.domain.clustering.Clustering;
+import pem.demo.domain.clustering.dao.Clustering;
 import pem.demo.domain.mobilityData.dao.MobilityData;
 
 import javax.persistence.*;

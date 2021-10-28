@@ -1,23 +1,19 @@
-package pem.demo.domain.clustering;
+package pem.demo.domain.clustering.service;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import pem.demo.domain.clustering.dao.Clustering;
+import pem.demo.domain.clustering.dao.ClusteringRepository;
 import pem.demo.domain.member.MemberRepository;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +44,7 @@ public class ClusteringService {
             for (Object object : arr.toArray()) {
                 JSONObject cluster = (JSONObject) object;
                 System.out.println("cluster = " + cluster);
-                Clustering clustering = new Clustering.ClusteringBuilder()
+                Clustering clustering = Clustering.builder()
                         .cluster((String) cluster.get("cluster"))
                         .latitude(Double.parseDouble((String) cluster.get("latitude")))
                         .longitude(Double.parseDouble((String) cluster.get("latitude")))
@@ -85,7 +81,7 @@ public class ClusteringService {
             for (Object object : arr.toArray()) {
                 JSONObject cluster = (JSONObject) object;
                 System.out.println("cluster = " + cluster);
-                Clustering clustering = new Clustering.ClusteringBuilder()
+                Clustering clustering = Clustering.builder()
                         .cluster((String) cluster.get("cluster"))
                         .latitude(Double.parseDouble((String) cluster.get("latitude")))
                         .longitude(Double.parseDouble((String) cluster.get("latitude")))
