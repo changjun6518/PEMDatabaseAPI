@@ -2,6 +2,7 @@
 
 ### To-Do-List
 - 모든 데이터 디비에 저장 시키자
+- mobility와 clustering 결과를 모두 확인할 수 있도록 만들자
 
 ### 기능 목록
 * MobilityData

@@ -26,14 +26,14 @@ public class FileUtil {
     public String getUserNameByRawDataFile(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
         String[] splitFileName = originalFilename.split("_");
-        userName = splitFileName[splitFileName.length - 1].replace(".txt", "");
+        userName = splitFileName[splitFileName.length - 1].replace(".txt", "").toLowerCase();
         return userName;
     }
 
     public String getUserNameByIntegratedJsonFile(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
         String[] splitFileName = originalFilename.split("_");
-        userName = splitFileName[1];
+        userName = splitFileName[1].toLowerCase();
         return userName;
     }
 
