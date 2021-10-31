@@ -49,6 +49,7 @@ public class FileUtil {
         }
     }
 
+    // .txt로 끝나는 지 검증했니?
     public void createListFile() throws IOException {
         File userRawdataDir = new File(rawdataPath + osPathSign + userName);
         File listFile = new File(listPath + "list_" + userName);

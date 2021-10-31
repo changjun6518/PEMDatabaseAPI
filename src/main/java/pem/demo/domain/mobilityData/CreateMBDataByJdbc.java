@@ -23,8 +23,13 @@ public class CreateMBDataByJdbc {
         Long memberId = getByUserNameOnFile(filePath);
         connectDB();
         batchInsert2(filePath, memberId);
+        closeDB();
     }
 
+    public void closeDB() throws SQLException {
+        st.close();
+        con.close();
+    }
 
     public void connectDB() {
         String url = "jdbc:mariadb://librarymusik.synology.me:3306/PEMDB";
@@ -46,10 +51,11 @@ public class CreateMBDataByJdbc {
             con.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            st.close();
-            con.close();
         }
+//        finally {
+//            st.close();
+//            con.close();
+//        }
     }
 
     public void insertMobilityData(String filePath, Long memberId) {

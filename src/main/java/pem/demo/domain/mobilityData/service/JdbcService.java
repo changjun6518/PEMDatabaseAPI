@@ -90,7 +90,7 @@ public class JdbcService {
         }
     }
 
-    private boolean validateDuplicate(String fileName) {
+    public boolean validateDuplicate(String fileName) {
         String ymd = fileName.split("_")[YMD_INDEX];
         String convertedYmd = ymd.substring(0, 4) + "|" + ymd.substring(4, 6) + "|" + ymd.substring(6, 8);
 
