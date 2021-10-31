@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pem.demo.domain.clustering.dao.Clustering;
 import pem.demo.domain.clustering.dao.ClusteringRepository;
+import pem.demo.domain.clustering.exception.NotFoundUserException;
+import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberRepository;
 
 import java.io.File;
@@ -16,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClusteringService {
@@ -30,6 +33,13 @@ public class ClusteringService {
         }
     }
 
+    public List<Clustering> findByUserName(String userName) throws NotFoundUserException {
+        Optional<Member> member = memberRepository.findByName(userName);
+        if (member.isPresent()) {
+            return member.get().getClusterings();
+        }
+        throw new NotFoundUserException();
+    }
 
     private void toJsonAndSave(MultipartFile file, String basePath) {
         JSONParser parser = new JSONParser();

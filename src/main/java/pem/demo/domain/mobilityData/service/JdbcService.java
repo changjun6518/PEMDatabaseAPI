@@ -54,14 +54,16 @@ public class JdbcService {
                     initMessage();
                     duplicatedFile = new StringBuilder();
                     duplicatedFile.append(file.getOriginalFilename());
-                    throw new DuplicationException();
+                    continue;
+//                    throw new DuplicationException();
                 }
                 String filePath = createFile(file);
                 batchInsert(filePath);
             }
         } catch (DuplicationException e) {
-            settingMessage(e);
             System.out.println(e.getMessage());
+        } finally {
+            settingMessage();
         }
     }
 
@@ -105,10 +107,10 @@ public class JdbcService {
             message.setLength(0);
     }
 
-    private void settingMessage(DuplicationException e) {
+    private void settingMessage() {
         message.append(duplicatedFile);
         message.append(" , ");
-        message.append(e.getMessage());
+        message.append("데이터가 중복되었습니다");
         message.append("\n");
     }
 }
