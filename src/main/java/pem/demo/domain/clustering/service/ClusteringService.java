@@ -27,8 +27,11 @@ public class ClusteringService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void save(List<MultipartFile> files, String basePath) {
+    public void save(List<MultipartFile> files, String basePath) throws IOException {
         for (MultipartFile file : files) {
+            String filePath = basePath + file.getOriginalFilename();
+            File dest = new File(filePath);
+            file.transferTo(dest);
             toJsonAndSave(file, basePath);
         }
     }

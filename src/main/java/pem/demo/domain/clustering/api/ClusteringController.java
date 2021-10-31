@@ -30,7 +30,7 @@ public class ClusteringController {
         FileUtil fileUtil = new FileUtil();
         for (MultipartFile file : files) {
             fileUtil.getUserNameByIntegratedJsonFile(file);
-            basePath = rootPath + fileUtil.getUserName() + "/results/integratedJSON";
+            basePath = rootPath + fileUtil.getUserName() + "/results/integratedJSON/";
         }
         clusteringService.save(files, basePath);
         return "clusteringData";
