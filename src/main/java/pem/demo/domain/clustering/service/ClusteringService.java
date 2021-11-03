@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pem.demo.domain.clustering.dao.Clustering;
 import pem.demo.domain.clustering.dao.ClusteringRepository;
+import pem.demo.domain.clustering.dto.ClusteringDto;
 import pem.demo.domain.clustering.exception.NotFoundUserException;
 import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberRepository;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClusteringService {
@@ -36,10 +38,11 @@ public class ClusteringService {
         }
     }
 
-    public List<Clustering> findByUserName(String userName) throws NotFoundUserException {
+    public List<ClusteringDto> findByUserName(String userName) throws NotFoundUserException {
         Optional<Member> member = memberRepository.findByName(userName);
         if (member.isPresent()) {
-            return member.get().getClusterings();
+            List<Clustering> clusterings = member.get().getClusterings();
+            return clusterings.stream().map(clustering -> ClusteringDto.of(clustering)).collect(Collectors.toList());
         }
         throw new NotFoundUserException();
     }

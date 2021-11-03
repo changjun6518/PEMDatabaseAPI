@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pem.demo.domain.clustering.dao.Clustering;
+import pem.demo.domain.clustering.dto.ClusteringDto;
 import pem.demo.domain.clustering.exception.NotFoundUserException;
 import pem.demo.domain.clustering.service.ClusteringService;
 
@@ -25,7 +26,7 @@ public class ClusteringApi {
     }
 
     @GetMapping("getData")
-    public List<Clustering> getData(@RequestParam("name") String name) throws NotFoundUserException {
+    public List<ClusteringDto> getData(@RequestParam("name") String name) throws NotFoundUserException {
         return clusteringService.findByUserName(name);
     }
 
