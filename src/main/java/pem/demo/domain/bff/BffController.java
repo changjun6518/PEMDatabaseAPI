@@ -26,8 +26,8 @@ public class BffController {
     @PostMapping("/bff/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files , Model model) throws Exception {
         model.addAttribute("data", "data 저장이 완료 되었습니다!");
-        String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-        String basePath = rootPath + "\\" + "single";
+        String rootPath = "D:\\코딩\\자바\\pemDB";
+        String basePath = rootPath + "\\" + "bffData";
         bffService.saveBffDataByCsvFiles(files, basePath);
         return "bffData";
     }

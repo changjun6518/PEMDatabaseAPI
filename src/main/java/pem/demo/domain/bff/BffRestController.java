@@ -16,12 +16,6 @@ public class BffRestController {
     @Autowired
     BffService bffService;
 
-    @GetMapping("getData")
-    public BffResDto getData(
-            @RequestParam("name") String name
-    ) {
-        return bffService.getBffData(name);
-    }
 
     @GetMapping("getDataAll")
     public ArrayList<BffResDto> getDataAll() {

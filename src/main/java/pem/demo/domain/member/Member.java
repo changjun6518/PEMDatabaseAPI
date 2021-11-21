@@ -25,9 +25,6 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private final List<MobilityData> mobilityDatas = new ArrayList<>();
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Bff bff;
-
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private final List<Clustering> clusterings = new ArrayList<>();
 

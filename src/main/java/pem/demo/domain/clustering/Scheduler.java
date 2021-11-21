@@ -15,7 +15,7 @@ public class Scheduler {
     @Autowired
     ClusteringService clusteringService;
 
-    @PostConstruct
+//    @PostConstruct
     private void autoSaveIntegratedJson() {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {

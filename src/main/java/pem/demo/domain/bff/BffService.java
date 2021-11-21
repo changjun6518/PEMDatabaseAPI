@@ -1,5 +1,6 @@
 package pem.demo.domain.bff;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,22 +25,29 @@ public class BffService {
 
     private void saveBffData(String filePath) throws IOException {
         BufferedReader br = Files.newBufferedReader(Paths.get(filePath));
-        //Charset.forName("UTF-8");
         String line = "";
-        String firstLine = br.readLine();
-        System.out.println(firstLine);
+        ArrayList<Bff> bffs = new ArrayList<>();
         while ((line = br.readLine()) != null) {
-            ArrayList<Float> bffFeatures = new ArrayList<>();
-            String array[] = line.split(",");
-            String name = array[0];
-            Member member = memberService.findUserByUserName(name);
-            for (int i = 1; i < array.length; i++) {
-                float bffFeature = Float.parseFloat(array[i]);
-                bffFeatures.add(bffFeature);
-            }
-            bffRepository.save(new Bff(member, bffFeatures));
+            JSONObject bffJson = new JSONObject(line);
+            Bff bff = Bff.builder()
+                    .o(parseFloatFunc(bffJson,"o")).c(parseFloatFunc(bffJson,"c"))
+                    .e(parseFloatFunc(bffJson,"e")).a(parseFloatFunc(bffJson,"a"))
+                    .n(parseFloatFunc(bffJson,"n"))
+                    .aaa(parseFloatFunc(bffJson,"aaa")).bbb(parseFloatFunc(bffJson,"bbb"))
+                    .ccc(parseFloatFunc(bffJson,"ccc")).ddd(parseFloatFunc(bffJson,"ddd"))
+                    .eee(parseFloatFunc(bffJson,"eee")).fff(parseFloatFunc(bffJson,"fff"))
+                    .ggg(parseFloatFunc(bffJson,"ggg")).hhh(parseFloatFunc(bffJson,"hhh"))
+                    .iii(parseFloatFunc(bffJson,"iii")).jjj(parseFloatFunc(bffJson,"jjj"))
+                    .age(parseIntFunc(bffJson, "age")).job(parseIntFunc(bffJson, "job"))
+                    .marriage(parseIntFunc(bffJson, "marriage")).edu(parseIntFunc(bffJson, "edu"))
+                    .major(parseIntFunc(bffJson, "major")).religion(parseIntFunc(bffJson, "religion"))
+                    .salary(parseIntFunc(bffJson, "salary")).vehicles(parseIntFunc(bffJson, "vehicles"))
+                    .commt(parseIntFunc(bffJson, "commt")).travel(parseIntFunc(bffJson, "travel"))
+                    .sns1(parseIntFunc(bffJson, "sns1")).sns2(parseIntFunc(bffJson, "sns2"))
+                    .culture(parseIntFunc(bffJson, "culture")).build();
+            bffs.add(bff);
         }
-
+        bffRepository.saveAll(bffs);
     }
 
     public void saveBffDataByCsvFiles(List<MultipartFile> files, String basePath) throws IOException {
@@ -52,11 +60,6 @@ public class BffService {
         }
     }
 
-    public BffResDto getBffData(String name) {
-        Bff bffByMemberName = bffRepository.findBffByMemberName(name);
-        return new BffResDto(bffByMemberName);
-    }
-
     public ArrayList<BffResDto> getBffDataAll() {
         List<Bff> bffAll = bffRepository.findAll();
         ArrayList<BffResDto> bffResDtos = new ArrayList<>();
@@ -64,5 +67,12 @@ public class BffService {
             bffResDtos.add(new BffResDto(bff));
         }
         return bffResDtos;
+    }
+
+    private Float parseFloatFunc(JSONObject bffJson, String key) {
+        return Float.parseFloat(bffJson.get(key).toString());
+    }
+    private Integer parseIntFunc(JSONObject bffJson, String key) {
+        return Integer.parseInt(bffJson.get(key).toString());
     }
 }
