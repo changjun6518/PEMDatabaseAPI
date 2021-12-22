@@ -1,41 +1,62 @@
 # PEM Database API
 
-### To-Do-List
-- 모든 데이터 디비에 저장 시키자
-- mobility와 clustering 결과를 모두 확인할 수 있도록 만들자
+- PEM 연구실 위치 데이터를 저장, 조회 등 기능을 하는 API
+---
 
 ### 기능 목록
-* MobilityData
-  - [x] mobility data 디비에 저장하기(시간, 위도, 경도 등)
-  - [x] mobility data 가상머신에 저장하기 (폴더 구조 만들기 & os에 따른 경로 설정)
-  - [x] MB data 가져오기
-  - [x] MB data 저장하기 (raw level의 데이터 삽입할때)
-  - [ ] MB data 수정 및 삭제하기
-  - [x] MB data 중복 검증하기
-* BffData CRUD
-* ClusteringData
-* util
-  - fileUtil
-    - [x] basePath, osPathSign set하기
-    - [x] userName file을 통해서 뽑아내기
-    - [x] 필요한 폴더(rawdata/userName) 만들어주기
-    - [x] list_userName 만들기
-  
-### TODO List
-* CRUD
-* 배치 인서트
-* 검증
-* 엔티티 연관관계 설정
-* cascade type
-* user가 필요한가?
-* nosql써보는 건 어떤가?
+- MobilityData
+  - 저장
+    - 사용자가 MobilityData를 단일파일로 저장한다
+    - 사용자가 MobilityData를 여러파일로 저장한다
+    - 사용자가 MobilityData를 폴더형식으로 저장한다
+  - 조회(사용)
+    - 사용자가 특정 이니셜 MobilityData를 가져온다
+    - 사용자가 여러 이니셜 MobilityData를 가져온다
+  - 수정
+    - 사용자가 특정 이니셜 MobilityData를 수정한다
+      - MobilityData 속성 값에 따라 선택하여 수정한다( 어떤 속성값으로 가져올 것인지? )
+  - 삭제
+    - 사용자가 특정 이니셜 MobilityData를 삭제한다
+      - MobilityData 속성 값에 따라 선택하여 삭제한다( 어떤 속성값으로 가져올 것인지? )
+  - 예외처리
+    - MobilityData가 중복되지 않게 저장하도록 한다 ( pk를 설정해도 좋을 듯 )
 
-### 어려웠던 점 & 아쉬운 점
-* 대량 데이터 Insert시 시간이 오래걸림
-  * JPA로 해결하지 못하여 jdbc를 통해 시간 단축
-  * 채번에 따른 batch insert 동작 오류 이해하지못함
+- BffData
+  - 저장
+    - 사용자가 Bff 특정 파일로만 저장한다
+  - 조회(사용)
+    - 사용자가 모든 BffData를 가져온다
+  - 삭제
+    - 모든 BffData를 삭제한다
   
-* bffData findAll할때 More than one row with the given identifier was found: 26,
-에러 발생 -> fetch.Lazy로 해결하였지만 이해하지못함
+- ClusteringData
+  - 저장
+    - 사용자가 ClusteringData를 단일파일로 저장한다
+    - 사용자가 ClusteringData를 여러파일로 저장한다
+    - 사용자가 ClusteringData를 폴더형식으로 저장한다
+    - 가상머신이 자동으로 ClusteringData를 저장한다
+  - 조회(사용)
+    - 사용자가 특정 이니셜 ClusteringData를 가져온다
+    - 사용자가 여러 이니셜 ClusteringData를 가져온다
+  - 수정
+    - 사용자가 특정 이니셜 ClusteringData를 수정한다
+      - MobilityData 속성 값에 따라 선택하여 수정한다( 어떤 속성값으로 가져올 것인지? )
+  - 삭제
+    - 사용자가 특정 이니셜 ClusteringData를 삭제한다
+      - ClusteringData 속성 값에 따라 선택하여 삭제한다( 어떤 속성값으로 가져올 것인지? )
+  - 예외처리
+    - ClusteringData가 중복되지 않게 저장하도록 한다 ( pk를 설정해도 좋을 듯 )
   
-* jenkins로 자동 배포!
+- Util
+  - 운영체제에 따라 basePath 설정한다
+  - 자동화에 필요한 폴더 파일 세팅한다
+  
+---
+## 배포
+- azure 가상머신
+- jenkins
+
+---
+### 폴더 구조
+### 자동화 방식
+### 아키텍처
