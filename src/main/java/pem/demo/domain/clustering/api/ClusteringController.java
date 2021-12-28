@@ -25,14 +25,9 @@ public class ClusteringController {
 
     @PostMapping("/multifiles")
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files) throws Exception {
-        String rootPath = "/home/PEM/jenkins/workspace/devOps/clusterPython/result/";
-        String basePath = "";
-        FileUtil fileUtil = new FileUtil();
         for (MultipartFile file : files) {
-            fileUtil.getUserNameByIntegratedJsonFile(file);
-            basePath = rootPath + fileUtil.getUserName() + "/results/integratedJSON/";
+            clusteringService.save(files);
         }
-        clusteringService.save(files, basePath);
         return "clusteringData";
     }
 }

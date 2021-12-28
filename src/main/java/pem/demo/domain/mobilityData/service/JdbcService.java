@@ -8,40 +8,32 @@ import pem.demo.domain.mobilityData.dao.MBRepository;
 import pem.demo.domain.mobilityData.dao.MobilityData;
 import pem.demo.domain.mobilityData.exception.DuplicationException;
 import pem.demo.util.FileUtil;
-import pem.demo.util.constant.FileMessage;
+import pem.demo.util.constant.FilePathMessage;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class JdbcService {
     protected final MemberService memberService;
     protected final MBRepository mbRepository;
-    private static final String os = System.getProperty("os.name").toLowerCase();
     private static final Integer YMD_INDEX = 0;
-    private final FileUtil fileUtil = new FileUtil();
-    private static String basePath;
     private static StringBuilder message;
     private static StringBuilder duplicatedFile = new StringBuilder();
 
     public JdbcService(MemberService memberService, MBRepository mbRepository) {
         this.memberService = memberService;
         this.mbRepository = mbRepository;
-        setBasePath();
     }
 
     public void setNecessaryFileAndBatchInsert(List<MultipartFile> files) throws IOException, SQLException {
-        String userName = fileUtil.getUserNameByRawDataFile(files.get(0));
-        fileUtil.setBasePath(basePath);
-        fileUtil.checkNecessaryFolder(basePath, userName); // rawdata 폴더에 User 만들어주는 부분
+        String userName = FileUtil.getUserNameByRawDataFile(files.get(0));
+        FileUtil.checkNecessaryFolder(userName); // rawdata 폴더에 User 만들어주는 부분
 
         batchInsertByFiles(files);
-        fileUtil.createListFile();                      // List_User를 만들어주는 부분
+        FileUtil.createListFile(userName);                      // List_User를 만들어주는 부분
 
         // 나중에 이부분 트렌젝션 하게 처리해야함 AOP?
     }
@@ -72,22 +64,12 @@ public class JdbcService {
         createMBDataByJdbc.run(filePath);
     }
 
-
     protected String createFile(MultipartFile file) throws IOException {
-        String filePath = fileUtil.getRawdataPath() + fileUtil.getUserName() + fileUtil.getOsPathSign() + file.getOriginalFilename();
+        String filePath = FileUtil.getFilePathByRawDataFile(file);
         File dest = new File(filePath);
         System.out.println(filePath);
         file.transferTo(dest); // 파일 업로드 작업 수행
         return filePath;
-    }
-
-    protected void setBasePath() {
-        if (os.contains("win")) {
-            basePath = FileMessage.WINDOW_OS_BASE_PATH.getPath();
-        }
-        else if (os.contains("nix") || os.contains("nux") || os.contains("aix")){
-        basePath = FileMessage.LINUX_OS_BASE_PATH.getPath();
-        }
     }
 
     public boolean validateDuplicate(String fileName) {

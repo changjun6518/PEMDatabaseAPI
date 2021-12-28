@@ -13,6 +13,8 @@ import pem.demo.domain.clustering.dto.ClusteringDto;
 import pem.demo.domain.clustering.exception.NotFoundUserException;
 import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberRepository;
+import pem.demo.util.FileUtil;
+import pem.demo.util.constant.FilePathMessage;
 
 import java.io.File;
 import java.io.FileReader;
@@ -29,12 +31,12 @@ public class ClusteringService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void save(List<MultipartFile> files, String basePath) throws IOException {
+    public void save(List<MultipartFile> files) throws IOException {
         for (MultipartFile file : files) {
-            String filePath = basePath + file.getOriginalFilename();
+            String filePath = FileUtil.getFilePathByIntegratedJsonFile(file);
             File dest = new File(filePath);
             file.transferTo(dest);
-            toJsonAndSave(file, basePath);
+            toJsonAndSave(file);
         }
     }
 
@@ -47,11 +49,11 @@ public class ClusteringService {
         throw new NotFoundUserException();
     }
 
-    private void toJsonAndSave(MultipartFile file, String basePath) {
+    private void toJsonAndSave(MultipartFile file) {
         JSONParser parser = new JSONParser();
         try {
-            System.out.println("basePath + file.getOriginalFilename() = " + basePath + file.getOriginalFilename());
-            FileReader reader = new FileReader(basePath + file.getOriginalFilename());
+            System.out.println("basePath + file.getOriginalFilename() = " + FileUtil.getFilePathByIntegratedJsonFile(file));
+            FileReader reader = new FileReader(FileUtil.getFilePathByIntegratedJsonFile(file));
             Object obj = parser.parse(reader);
             JSONArray arr = (JSONArray) obj;
             reader.close();
