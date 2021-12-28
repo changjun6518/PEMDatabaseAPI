@@ -8,6 +8,7 @@ import pem.demo.domain.mobilityData.dao.MBRepository;
 import pem.demo.domain.mobilityData.dao.MobilityData;
 import pem.demo.domain.mobilityData.exception.DuplicationException;
 import pem.demo.util.FileUtil;
+import pem.demo.util.constant.FileMessage;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -22,7 +23,6 @@ public class JdbcService {
     protected final MemberService memberService;
     protected final MBRepository mbRepository;
     private static final String os = System.getProperty("os.name").toLowerCase();
-    private static final String rootPath = "D:/코딩/자바";
     private static final Integer YMD_INDEX = 0;
     private final FileUtil fileUtil = new FileUtil();
     private static String basePath;
@@ -83,10 +83,10 @@ public class JdbcService {
 
     protected void setBasePath() {
         if (os.contains("win")) {
-            basePath = rootPath + "/pemDB/clusterPython/";
+            basePath = FileMessage.WINDOW_OS_BASE_PATH.getPath();
         }
         else if (os.contains("nix") || os.contains("nux") || os.contains("aix")){
-        basePath = "/home/PEM/jenkins/workspace/devOps/clusterPython/";
+        basePath = FileMessage.LINUX_OS_BASE_PATH.getPath();
         }
     }
 

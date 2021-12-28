@@ -37,6 +37,7 @@ public class FileUtil {
         return userName;
     }
 
+    // basePath/rawdata/userName 폴더 만들기
     public void checkNecessaryFolder(String basePath, String userName) {
         for (String necessaryFolder : necessaryFolders) {
             String rawdataPath = basePath + necessaryFolder + osPathSign + userName;
