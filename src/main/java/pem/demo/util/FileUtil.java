@@ -41,6 +41,12 @@ public class FileUtil {
         return userName;
     }
 
+    public static String getUserNameByRawDataPath(String filePath) {
+        String[] splitFileName = filePath.split("_");
+        String userName = splitFileName[splitFileName.length - 1].replace(".txt", "").toLowerCase();
+        return userName;
+    }
+
     public static String getUserNameByIntegratedJsonFile(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
         String[] splitFileName = originalFilename.split("_");
@@ -48,8 +54,7 @@ public class FileUtil {
         return userName;
     }
 
-    // basePath/rawdata/userName 폴더 만들기
-    public static void checkNecessaryFolder(String userName) {
+    public static void createRawDataFolder(String userName) {
         String rawdataPath = basePath + FilePathMessage.RAW_DATA_PATH.getPath() + userName;
         File rawdataFolder = new File(rawdataPath);
 
@@ -59,7 +64,6 @@ public class FileUtil {
         }
     }
 
-    // .txt로 끝나는 지 검증했니?
     public static void createListFile(String userName) throws IOException {
         File rawdataFolder = new File(rawdataPath + userName);
         File listFile = new File(listPath + "list_" + userName);
@@ -68,8 +72,10 @@ public class FileUtil {
         }
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(listFile, false));
         for (File file : rawdataFolder.listFiles()) {
-            bufferedWriter.write("./rawdata/" + userName + "/" + file.getName());
-            bufferedWriter.newLine();
+            if (file.getName().endsWith(".txt")) {
+                bufferedWriter.write("./rawdata/" + userName + "/" + file.getName());
+                bufferedWriter.newLine();
+            }
         }
         bufferedWriter.flush();
         bufferedWriter.close();

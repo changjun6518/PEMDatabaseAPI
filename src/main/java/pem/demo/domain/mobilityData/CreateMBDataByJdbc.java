@@ -3,6 +3,7 @@ package pem.demo.domain.mobilityData;
 import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberService;
 import pem.demo.domain.mobilityData.dao.MobilityData;
+import pem.demo.util.FileUtil;
 
 import java.io.*;
 import java.sql.*;
@@ -17,7 +18,6 @@ public class CreateMBDataByJdbc {
     public CreateMBDataByJdbc(MemberService memberService) {
         this.memberService = memberService;
     }
-
 
     public void run(String filePath) throws SQLException {
         Long memberId = getByUserNameOnFile(filePath);
@@ -52,13 +52,9 @@ public class CreateMBDataByJdbc {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        finally {
-//            st.close();
-//            con.close();
-//        }
     }
 
-    public void insertMobilityData(String filePath, Long memberId) {
+    private void insertMobilityData(String filePath, Long memberId) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             long start = System.currentTimeMillis();
@@ -86,16 +82,12 @@ public class CreateMBDataByJdbc {
     }
 
 
-    public Long getByUserNameOnFile(String filePath) {
+    private Long getByUserNameOnFile(String filePath) {
         String userName = "";
         Long userId = null;
         try {
-            String[] dirNameSplit = filePath.split("_");
-            userName = dirNameSplit[dirNameSplit.length - 1].replace(".txt", "");       //get user name (the last directory name)
-            System.out.println("user : " + userName);
+            userName = FileUtil.getUserNameByRawDataPath(filePath);
             Member member = memberService.findUserByUserName(userName);
-            System.out.println("member : " + member.getName());
-
             userId = member.getId();
         } catch (Exception e) {
             System.out.println("not found user");

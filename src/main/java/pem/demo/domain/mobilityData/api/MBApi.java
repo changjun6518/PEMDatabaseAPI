@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pem.demo.domain.mobilityData.GetDataByFile;
 import pem.demo.domain.mobilityData.dao.MBRepository;
 import pem.demo.domain.mobilityData.dto.MBResDto;
+import pem.demo.domain.mobilityData.service.JdbcService;
 import pem.demo.domain.mobilityData.service.MBService;
 
 import java.sql.SQLException;
@@ -24,8 +24,7 @@ public class MBApi {
     @Autowired
     MBRepository mbRepository;
     @Autowired
-    GetDataByFile getDataByFile;
-
+    JdbcService jdbcService;
 
     @GetMapping("getData")
     public Page<MBResDto> getData(
@@ -35,10 +34,9 @@ public class MBApi {
         return mbService.getMBData(offset, limit, name);
     }
 
-
-    @GetMapping("self")
-    public ResponseEntity<String> getLocalData(@RequestParam("name") String name) throws SQLException {
-        getDataByFile.run("D:/코딩/LAB/em/em/rawdata/" + name);
+    @GetMapping("saveAll")
+    public ResponseEntity<String> saveMBDataAllBy(@RequestParam("name") String name) throws SQLException {
+        jdbcService.saveAllBy(name);
         return ResponseEntity.status(HttpStatus.OK).body("SaveSuccess");
     }
 }

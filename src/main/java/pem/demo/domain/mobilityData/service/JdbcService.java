@@ -2,6 +2,7 @@ package pem.demo.domain.mobilityData.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import pem.demo.domain.member.Member;
 import pem.demo.domain.member.MemberService;
 import pem.demo.domain.mobilityData.CreateMBDataByJdbc;
 import pem.demo.domain.mobilityData.dao.MBRepository;
@@ -20,8 +21,6 @@ public class JdbcService {
     protected final MemberService memberService;
     protected final MBRepository mbRepository;
     private static final Integer YMD_INDEX = 0;
-    private static StringBuilder message;
-    private static StringBuilder duplicatedFile = new StringBuilder();
 
     public JdbcService(MemberService memberService, MBRepository mbRepository) {
         this.memberService = memberService;
@@ -30,41 +29,41 @@ public class JdbcService {
 
     public void setNecessaryFileAndBatchInsert(List<MultipartFile> files) throws IOException, SQLException {
         String userName = FileUtil.getUserNameByRawDataFile(files.get(0));
-        FileUtil.checkNecessaryFolder(userName); // rawdata 폴더에 User 만들어주는 부분
+        FileUtil.createRawDataFolder(userName);
 
         batchInsertByFiles(files);
-        FileUtil.createListFile(userName);                      // List_User를 만들어주는 부분
-
+        FileUtil.createListFile(userName);
         // 나중에 이부분 트렌젝션 하게 처리해야함 AOP?
     }
 
-    protected void batchInsertByFiles(List<MultipartFile> files) throws IOException, SQLException {
-        message = new StringBuilder("data 저장이 완료 되었습니다!");
-        try {
-            for (MultipartFile file : files) {
-                if (validateDuplicate(file.getOriginalFilename())) {
-                    initMessage();
-                    duplicatedFile = new StringBuilder();
-                    duplicatedFile.append(file.getOriginalFilename());
-                    continue;
-//                    throw new DuplicationException();
-                }
-                String filePath = createFile(file);
-                batchInsert(filePath);
+    public void saveAllBy(String userName) throws SQLException {
+        CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
+        String filePath = FilePathMessage.WINDOW_OS_RAW_DATA_PATH.getPath() + userName;
+        Member user = memberService.findUserByUserName(userName);
+        File dir = new File(filePath);
+        File files[] = dir.listFiles();
+        createMBDataByJdbc.connectDB();
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getPath().endsWith(".txt") && !validateDuplicate(files[i].getName())) {
+                createMBDataByJdbc.batchInsert2(files[i].getPath(), user.getId());
             }
-        } catch (DuplicationException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            settingMessage();
+        }
+        createMBDataByJdbc.closeDB();
+    }
+
+    private void batchInsertByFiles(List<MultipartFile> files) throws IOException, SQLException {
+        for (MultipartFile file : files) {
+            String filePath = createFile(file);
+            batchInsert(filePath);
         }
     }
 
-    protected void batchInsert(String filePath) throws SQLException {
+    private void batchInsert(String filePath) throws SQLException {
         CreateMBDataByJdbc createMBDataByJdbc = new CreateMBDataByJdbc(memberService);
         createMBDataByJdbc.run(filePath);
     }
 
-    protected String createFile(MultipartFile file) throws IOException {
+    private String createFile(MultipartFile file) throws IOException {
         String filePath = FileUtil.getFilePathByRawDataFile(file);
         File dest = new File(filePath);
         System.out.println(filePath);
@@ -72,27 +71,12 @@ public class JdbcService {
         return filePath;
     }
 
-    public boolean validateDuplicate(String fileName) {
+    // 중복 검증 안하고 있음 2021.12.29
+    private boolean validateDuplicate(String fileName) {
         String ymd = fileName.split("_")[YMD_INDEX];
         String convertedYmd = ymd.substring(0, 4) + "|" + ymd.substring(4, 6) + "|" + ymd.substring(6, 8);
 
         MobilityData topByYmd = mbRepository.findFirstByYmd(convertedYmd);
         return topByYmd != null;
-    }
-
-
-    public String getMessage() {
-        return message.toString();
-    }
-
-    private void initMessage() {
-            message.setLength(0);
-    }
-
-    private void settingMessage() {
-        message.append(duplicatedFile);
-        message.append(" , ");
-        message.append("데이터가 중복되었습니다");
-        message.append("\n");
     }
 }

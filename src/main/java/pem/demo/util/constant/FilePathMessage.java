@@ -7,6 +7,8 @@ public enum FilePathMessage {
     LIST_PATH("list/"),
     CLUSTER_RESULT_PATH("result/"),
     CLUSTER_RESULT_DETAIL_PATH("/results/integratedJSON/"),
+
+    WINDOW_OS_RAW_DATA_PATH("D:/코딩/LAB/em/em/rawdata/"),
     ;
 
     private String path;
