@@ -32,7 +32,7 @@ public class MBController {
     public String uploadSingle(@RequestParam("files") List<MultipartFile> files ,Model model) throws Exception {
         jdbcService.setNecessaryFileAndBatchInsert(files);
 
-        model.addAttribute("data", jdbcService.getMessage());
+        model.addAttribute("data", "저장 성공");
         return "mobilityData";
     }
 
